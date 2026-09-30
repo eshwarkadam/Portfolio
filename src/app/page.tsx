@@ -80,12 +80,12 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-lg font-medium">{me.first} {me.last}</p>
-                <p className="text-mute">Android & Full-Stack Engineer · Pune</p>
+                <p className="text-mute">Software Engineer · Pune</p>
               </div>
             </div>
           </Reveal>
           <Reveal delay={0.1} className="md:pt-12">
-            <p className="text-2xl leading-snug">As an Android engineer, I build the whole path from a user&apos;s tap to the server and back.</p>
+            <p className="text-2xl leading-snug">As a software engineer, I build the whole path from a user&apos;s tap to the server and back.</p>
             <p className="mt-5 leading-relaxed text-mute">
               Most of my work is end-to-end products: Kotlin & Compose apps, Ktor APIs on PostgreSQL and React dashboards, all backed by Firebase, and now with AI built in.
             </p>

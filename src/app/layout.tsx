@@ -8,9 +8,9 @@ const serif = Newsreader({ variable: "--nf-serif", subsets: ["latin"], style: "i
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eshwarkadam.com"),
-  title: "Eshwar Kadam | Android & Full-Stack Engineer",
+  title: "Eshwar Kadam | Software Engineer",
   description:
-    "Android & full-stack engineer in Pune: Kotlin, Jetpack Compose, Ktor, React and AI.",
+    "Software engineer in Pune: Kotlin, Jetpack Compose, Ktor, React and AI.",
   openGraph: { images: ["/hero-2.jpg"] },
 };
 
