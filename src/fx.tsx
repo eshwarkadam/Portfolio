@@ -190,3 +190,63 @@ export function Wave({ text }: { text: string }) {
     </span>
   );
 }
+
+/** Contact form posting to FormSubmit (no backend). First submission triggers a one-time activation email. */
+export function ContactForm({ email }: { email: string }) {
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    if (data._honey) return; // bot filled the hidden field
+    setState("sending");
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...data, _subject: `Portfolio message from ${data.name}`, _template: "table" }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      setState("sent");
+    } catch {
+      setState("error");
+    }
+  };
+  const field = "w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white placeholder:text-white/40 outline-none transition focus:border-sun focus:bg-white/15";
+  if (state === "sent")
+    return (
+      <div role="status" className="grid h-full place-items-center rounded-3xl border border-white/15 bg-white/5 p-8 text-center">
+        <div>
+          <p className="text-4xl">✓</p>
+          <p className="mt-3 text-xl font-medium">Thanks, message sent!</p>
+          <p className="mt-2 text-sm text-white/60">I&apos;ll reply within 1–2 days.</p>
+          <button onClick={() => setState("idle")} className="mt-5 text-sm text-sun underline underline-offset-4">Send another</button>
+        </div>
+      </div>
+    );
+  return (
+    <form onSubmit={submit} className="space-y-3 rounded-3xl border border-white/15 bg-white/5 p-5 text-left backdrop-blur-sm md:p-7">
+      <p className="mb-1 text-lg font-medium">Send a message</p>
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+      <label className="block">
+        <span className="sr-only">Your name</span>
+        <input required name="name" maxLength={80} placeholder="Your name" className={field} />
+      </label>
+      <label className="block">
+        <span className="sr-only">Your email</span>
+        <input required type="email" name="email" maxLength={120} placeholder="Your email" className={field} />
+      </label>
+      <label className="block">
+        <span className="sr-only">Message</span>
+        <textarea required name="message" rows={4} maxLength={2000} placeholder="Tell me about the role or project" className={`${field} resize-none`} />
+      </label>
+      <button data-ripple disabled={state === "sending"} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sun px-6 py-3 font-medium text-ink-deep transition hover:brightness-105 disabled:opacity-60">
+        {state === "sending" ? "Sending…" : "Send message →"}
+      </button>
+      {state === "error" && (
+        <p role="alert" className="text-sm text-[#ff9b9b]">Couldn&apos;t send right now. Please email me at {email}.</p>
+      )}
+    </form>
+  );
+}

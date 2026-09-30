@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
-import { DotGrid, Effects, Logo, Magnetic, Wave, MaskLine, Reveal, StackCard } from "@/fx";
+import { ContactForm, DotGrid, Effects, Logo, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">{children}</p>
@@ -34,8 +34,8 @@ export default function Home() {
       <Logo name={`${me.first} ${me.last}`} />
       <header className="fixed top-4 right-4 z-50 hidden items-center md:top-5 md:flex gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
         <nav className="hidden items-center md:flex">
-          {["About", "Services", "Skills", "Experience", "Work", "Contact"].map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="sweep rounded-full px-3 py-1.5 transition hover:text-ink-deep">{l}</a>
+          {["About", "Services", "Skills", "Experience", "Work", "Open to", "Contact"].map((l) => (
+            <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`} className="sweep rounded-full px-3 py-1.5 transition hover:text-ink-deep">{l}</a>
           ))}
         </nav>
       </header>
@@ -77,7 +77,7 @@ export default function Home() {
             <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Turning complexity<br />into <Em>clean software.</Em></h2>
             <div className="mt-10 flex items-center gap-5">
               <div className="relative size-32 overflow-hidden rounded-3xl bg-lav">
-                <Image src="/headshot.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
+                <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
               </div>
               <div>
                 <p className="text-lg font-medium">{me.first} {me.last}</p>
@@ -255,32 +255,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* OPEN TO */}
+        <section id="open-to" className="mx-auto max-w-6xl px-5 py-24">
+          <Reveal>
+            <Eyebrow>Availability</Eyebrow>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">What I&apos;m<br /><Em>looking for.</Em></h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Roles", "Software Engineer, Full-Stack or Android roles", "bg-lav"],
+              ["Work type", "Full-time roles and freelance projects", "bg-butter"],
+              ["Work mode", "Remote, hybrid or on-site in Pune", "bg-sage"],
+              ["Focus", "Mobile, backend, Google Cloud and AI features", "bg-peach"],
+            ].map(([k, v, bg], i) => (
+              <Reveal key={k} delay={i * 0.08} className="h-full">
+                <div data-glow className={`h-full rounded-[1.75rem] p-7 ${bg}`}>
+                  <p className="text-xs font-medium tracking-[0.2em] text-mute uppercase">{k}</p>
+                  <p className="mt-6 text-xl leading-snug font-medium">{v}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-6 flex items-center gap-2 text-sm text-mute">
+            <span className="size-2 rounded-full bg-green-500" /> Based in {me.location} (IST) · Available for interviews
+          </p>
+        </section>
+
         {/* CONTACT */}
         <section id="contact" className="p-3">
-          <div className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-14 text-center text-white md:py-20">
+          <div className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-14 text-white md:px-14 md:py-20">
             <DotGrid />
-            <Reveal className="relative">
-              <div className="relative mx-auto mb-5 size-20 md:size-24">
-                <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
-                <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
-              </div>
-              <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
-              <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have a project that<br /><Em>needs engineering?</Em></h2>
-              <p className="mx-auto mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to software engineering roles and freelance projects across mobile, web and cloud. Tell me what you&apos;re building.</p>
-            </Reveal>
-            <Magnetic className="relative mx-auto mt-7 w-fit max-w-full">
-              <a data-ripple href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 text-sm font-medium text-ink-deep sm:text-base">
-                {me.email}
-                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:-rotate-45">→</span>
-              </a>
-            </Magnetic>
-            <ul className="relative mt-6 flex flex-wrap justify-center gap-2 text-sm">
-              {[["View CV", "/Eshwar-Kadam-Resume.pdf"], ["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
-                <li key={l}>
-                  <a href={h} target={h.startsWith("tel:") ? undefined : "_blank"} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-4 py-2 transition">{l} ↗</a>
-                </li>
-              ))}
-            </ul>
+            <div className="relative mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2">
+              <Reveal className="text-center md:text-left">
+                <div className="relative mx-auto mb-5 size-20 md:mx-0 md:size-24">
+                  <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
+                  <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
+                </div>
+                <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
+                <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have a project that<br /><Em>needs engineering?</Em></h2>
+                <p className="mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to software engineering roles and freelance projects across mobile, web and cloud. Tell me what you&apos;re building.</p>
+                <p className="mt-6 text-sm text-white/60">Or email me directly</p>
+                <a data-ripple href={`mailto:${me.email}`} className="mt-1 inline-block max-w-full font-medium break-all text-sun underline-offset-4 hover:underline">{me.email}</a>
+                <ul className="mt-6 flex flex-wrap justify-center gap-2 text-sm md:justify-start">
+                  {[["View CV", "/Eshwar-Kadam-Resume.pdf"], ["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
+                    <li key={l}>
+                      <a href={h} target={h.startsWith("tel:") ? undefined : "_blank"} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-4 py-2 transition">{l} ↗</a>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <ContactForm email={me.email} />
+              </Reveal>
+            </div>
           </div>
           <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-5 py-6 text-sm text-mute">
             <span>© {new Date().getFullYear()} {me.first} {me.last} · {me.location}</span>
