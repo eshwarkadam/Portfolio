@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
-import { ContactForm, DotGrid, Effects, Logo, Wave, MaskLine, Reveal, StackCard } from "@/fx";
+import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">{children}</p>
@@ -32,13 +32,7 @@ export default function Home() {
       {/* NAV */}
       <Effects />
       <Logo name={`${me.first} ${me.last}`} />
-      <header className="fixed top-4 right-4 z-50 hidden items-center md:top-5 md:flex gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
-        <nav className="hidden items-center md:flex">
-          {["About", "Services", "Skills", "Experience", "Work", "Open to", "Contact"].map((l) => (
-            <a key={l} href={`#${l.toLowerCase().replace(" ", "-")}`} className="sweep rounded-full px-3 py-1.5 transition hover:text-ink-deep">{l}</a>
-          ))}
-        </nav>
-      </header>
+      <Nav />
 
       <main id="top">
         {/* HERO */}

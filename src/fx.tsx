@@ -250,3 +250,127 @@ export function ContactForm({ email }: { email: string }) {
     </form>
   );
 }
+
+const navItems = ["About", "Services", "Skills", "Experience", "Work", "Open to", "Contact"].map((label) => ({
+  label,
+  id: label.toLowerCase().replace(" ", "-"),
+}));
+
+/** Top nav: scroll progress bar, active-section pill, hide on scroll down, animated mobile menu. */
+export function Nav() {
+  const [active, setActive] = useState("");
+  const [hidden, setHidden] = useState(false);
+  const [solid, setSolid] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
+  useEffect(() => {
+    let last = scrollY;
+    const onScroll = () => {
+      const y = scrollY;
+      setSolid(y > 40);
+      setHidden(y > 300 && y > last + 4 ? true : y < last - 4 ? false : (h) => h);
+      last = y;
+    };
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    navItems.forEach(({ id }) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    addEventListener("scroll", onScroll, { passive: true });
+    return () => { removeEventListener("scroll", onScroll); io.disconnect(); };
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    addEventListener("keydown", esc);
+    return () => removeEventListener("keydown", esc);
+  }, [open]);
+
+  return (
+    <>
+      <motion.div aria-hidden style={{ scaleX: progress }} className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-sun" />
+
+      {/* desktop */}
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: hidden && !open ? -90 : 0, opacity: 1 }}
+        transition={{ duration: 0.45, ease }}
+        className={`fixed top-5 right-8 z-50 hidden rounded-full p-1 text-sm backdrop-blur-md transition-colors duration-300 md:block ${
+          solid ? "bg-white/95 shadow-[0_12px_36px_-12px_rgba(47,52,87,0.35)]" : "bg-white/70 shadow-[0_10px_30px_-14px_rgba(47,52,87,0.25)]"
+        }`}
+      >
+        <nav className="flex items-center" aria-label="Main">
+          {navItems.map(({ label, id }) => (
+            <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}
+               className={`relative isolate rounded-full px-3.5 py-1.5 transition-colors duration-200 ${active === id ? "text-ink-deep" : "text-ink hover:bg-lav/50 hover:text-ink-deep"}`}>
+              {active === id && (
+                <motion.span layoutId="nav-pill" transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                             className="absolute inset-0 -z-10 rounded-full bg-lav" />
+              )}
+              {label}
+            </a>
+          ))}
+        </nav>
+      </motion.header>
+
+      {/* mobile button */}
+      <motion.button
+        type="button"
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1, y: hidden && !open ? -90 : 0 }}
+        transition={{ duration: 0.4, ease }}
+        className="fixed top-4 right-4 z-[55] grid size-10 place-items-center rounded-full bg-white/90 shadow-[0_10px_30px_-12px_rgba(47,52,87,0.35)] backdrop-blur-md md:hidden"
+      >
+        <span className="relative block h-3 w-4">
+          <span className={`absolute left-0 h-0.5 w-4 rounded bg-ink-deep transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
+          <span className={`absolute top-1.5 left-0 h-0.5 w-4 rounded bg-ink-deep transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
+          <span className={`absolute left-0 h-0.5 w-4 rounded bg-ink-deep transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
+        </span>
+      </motion.button>
+
+      {/* mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[54] bg-ink-deep/95 backdrop-blur-md md:hidden"
+            onClick={() => setOpen(false)}
+          >
+            <nav aria-label="Mobile" className="flex h-full flex-col justify-center gap-1 px-8">
+              {navItems.map(({ label, id }, i) => (
+                <motion.a
+                  key={id}
+                  href={`#${id}`}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 12 }}
+                  transition={{ duration: 0.4, ease, delay: 0.05 + i * 0.05 }}
+                  className={`flex items-baseline gap-4 py-2 font-display text-4xl font-medium ${active === id ? "text-sun" : "text-white"}`}
+                >
+                  <span className="text-xs text-white/40">0{i + 1}</span>{label}
+                </motion.a>
+              ))}
+              <motion.a
+                href="/Eshwar-Kadam-Resume.pdf" target="_blank" rel="noreferrer"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+                className="mt-8 w-fit rounded-full bg-sun px-6 py-3 font-medium text-ink-deep"
+              >
+                View CV ↗
+              </motion.a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
