@@ -91,7 +91,7 @@ export default function Home() {
               I work across the full stack: mobile and web front ends, Kotlin/Ktor APIs on PostgreSQL, deployments on Google Cloud and Firebase, and AI features built in where they help.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-3">
-              {[["Experience", "2+", "years in software", "bg-lav"], ["Projects", "15+", "delivered end to end", "bg-butter"], ["Platforms", "3", "mobile, web & cloud", "bg-sage"]].map(([k, v, s, bg]) => (
+              {[["Experience", "2+", "years in software", "bg-lav"], ["Tech stack", "30+", "tools & technologies", "bg-butter"], ["Platforms", "3", "mobile, web & cloud", "bg-sage"]].map(([k, v, s, bg]) => (
                 <div key={k} className={`rounded-3xl p-4 md:p-5 ${bg}`}>
                   <p className="text-xs">{k}</p>
                   <p className="my-1 font-display text-4xl">{v}</p>
