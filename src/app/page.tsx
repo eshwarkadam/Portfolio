@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
-import { Logo, Magnetic, MaskLine, Reveal, StackCard } from "@/fx";
+import { DotGrid, Effects, Logo, Magnetic, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">{children}</p>
@@ -30,14 +30,15 @@ export default function Home() {
   return (
     <>
       {/* NAV */}
+      <Effects />
       <Logo name={`${me.first} ${me.last}`} />
       <header className="fixed top-4 right-4 z-50 md:top-5 flex items-center gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
         <nav className="hidden items-center md:flex">
           {["About", "Services", "Skills", "Experience", "Work", "Contact"].map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="rounded-full px-3 py-1.5 transition hover:bg-lav">{l}</a>
+            <a key={l} href={`#${l.toLowerCase()}`} className="sweep rounded-full px-3 py-1.5 transition hover:text-ink-deep">{l}</a>
           ))}
         </nav>
-        <a href={`mailto:${me.email}`} className="rounded-full bg-ink px-3 py-1 text-xs font-medium text-white md:px-4 md:py-1.5 md:text-sm transition hover:bg-ink-deep">Say hello</a>
+        <a data-fill data-ripple href={`mailto:${me.email}`} className="rounded-full bg-ink px-3 py-1 text-xs font-medium text-white md:px-4 md:py-1.5 md:text-sm transition hover:bg-ink-deep">Say hello</a>
       </header>
 
       <main id="top">
@@ -51,7 +52,7 @@ export default function Home() {
                         <div className="absolute inset-0 hidden bg-gradient-to-r from-ink/85 via-ink/30 via-30% to-transparent to-50% md:block" />
             <div className="relative px-5 md:max-w-md md:px-0">
               <Reveal now delay={0.5}>
-                <a href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
+                <a data-ripple href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
                   View my work
                   <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
                 </a>
@@ -60,8 +61,8 @@ export default function Home() {
                 </p>
               </Reveal>
               <h1 className="mt-4 text-[15vw] leading-[0.9] font-semibold md:text-[7rem]">
-                <MaskLine delay={0.1}>{me.first}</MaskLine>
-                <MaskLine delay={0.2}>{me.last}<span className="text-sun">.</span></MaskLine>
+                <MaskLine delay={0.1}><Wave text={me.first} /></MaskLine>
+                <MaskLine delay={0.2}><Wave text={me.last} /><span className="text-sun">.</span></MaskLine>
               </h1>
             </div>
           </div>
@@ -118,7 +119,7 @@ export default function Home() {
           <div className="mt-14 grid gap-4 md:grid-cols-2">
             {services.map((s, i) => (
               <Reveal key={s.title} delay={(i % 2) * 0.1} className="group h-full">
-                <article className="flex h-full flex-col rounded-[1.75rem] border border-lav bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(47,52,87,0.3)] md:p-9">
+                <article data-glow className="flex h-full flex-col rounded-[1.75rem] border border-lav bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(47,52,87,0.3)] md:p-9">
                   <div className="flex items-center justify-between">
                     <span className={`grid size-14 place-items-center rounded-2xl text-2xl ${s.bg}`}><s.icon /></span>
                     <span className="font-display text-5xl text-lav transition group-hover:text-sun">{s.n}</span>
@@ -151,6 +152,14 @@ export default function Home() {
                 </ul>
               </Reveal>
             ))}
+          </div>
+        </section>
+
+        {/* FLASHLIGHT BANNER */}
+        <section className="px-3 py-10">
+          <div data-flash className="relative grid h-64 place-items-center overflow-hidden rounded-[2rem] bg-[#1c2040] px-6 md:h-80">
+            <p className="text-center font-display text-4xl leading-tight font-extrabold text-[#2c3160] md:text-7xl">Built for production.<br />Designed to scale.</p>
+            <p aria-hidden className="flash-lit absolute inset-0 grid place-items-center bg-gradient-to-br from-sun to-[#fff3a8] px-6 text-center font-display text-4xl leading-tight font-extrabold text-ink-deep md:text-7xl">Built for production.<br />Designed to scale.</p>
           </div>
         </section>
 
@@ -224,8 +233,9 @@ export default function Home() {
 
         {/* CONTACT */}
         <section id="contact" className="p-3">
-          <div className="rounded-[2rem] bg-ink px-6 py-24 text-center text-white md:py-32">
-            <Reveal>
+          <div className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-24 text-center text-white md:py-32">
+            <DotGrid />
+            <Reveal className="relative">
               <div className="relative mx-auto mb-8 size-28 md:size-32">
                 <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="128px" className="rounded-full object-cover ring-4 ring-sun" />
                 <span className="absolute right-1 bottom-1 size-5 rounded-full border-4 border-ink bg-green-400" title="Available for work" />
@@ -234,23 +244,23 @@ export default function Home() {
               <h2 className="text-5xl leading-[1.05] font-medium md:text-7xl">Have an app that<br /><Em>needs building?</Em></h2>
               <p className="mx-auto mt-6 max-w-md text-white/70">I&apos;m open to Android, Kotlin and full-stack roles. Tell me what you&apos;re working on.</p>
             </Reveal>
-            <Magnetic className="mx-auto mt-10 w-fit max-w-full">
-              <a href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-2 pr-2 pl-5 text-sm font-medium text-ink-deep sm:pl-6 sm:text-base md:text-lg">
+            <Magnetic className="relative mx-auto mt-10 w-fit max-w-full">
+              <a data-ripple href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-2 pr-2 pl-5 text-sm font-medium text-ink-deep sm:pl-6 sm:text-base md:text-lg">
                 {me.email}
                 <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:-rotate-45">→</span>
               </a>
             </Magnetic>
-            <ul className="mt-10 flex flex-wrap justify-center gap-3 text-sm">
+            <ul className="relative mt-10 flex flex-wrap justify-center gap-3 text-sm">
               {[["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
                 <li key={l}>
-                  <a href={h} target={h.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="block rounded-full border border-white/20 px-5 py-2.5 transition hover:bg-white/10">{l} ↗</a>
+                  <a href={h} target={h.startsWith("http") ? "_blank" : undefined} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-5 py-2.5 transition">{l} ↗</a>
                 </li>
               ))}
             </ul>
           </div>
           <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-5 py-8 text-sm text-mute">
             <span>© {new Date().getFullYear()} {me.first} {me.last} · {me.location}</span>
-            <a href="#top" className="hover:text-ink">Back to top ↑</a>
+            <a href="#top" className="sweep -mx-3 px-3 pb-1 hover:text-ink">Back to top ↑</a>
           </footer>
         </section>
       </main>

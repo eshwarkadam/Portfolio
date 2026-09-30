@@ -98,3 +98,95 @@ export function Logo({ name }: { name: string }) {
     </motion.a>
   );
 }
+
+/** Page-wide mouse effects via data attributes:
+ *  data-glow / data-fill / data-flash get --x/--y (cursor position inside the element),
+ *  data-ripple spawns a ripple on click. */
+export function Effects() {
+  useEffect(() => {
+    const move = (e: PointerEvent) => {
+      const el = (e.target as Element).closest<HTMLElement>("[data-glow],[data-fill],[data-flash]");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--x", `${e.clientX - r.left}px`);
+      el.style.setProperty("--y", `${e.clientY - r.top}px`);
+    };
+    const click = (e: MouseEvent) => {
+      const el = (e.target as Element).closest<HTMLElement>("[data-ripple]");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const s = document.createElement("span");
+      s.className = "rp";
+      s.style.left = `${e.clientX - r.left}px`;
+      s.style.top = `${e.clientY - r.top}px`;
+      el.appendChild(s);
+      setTimeout(() => s.remove(), 700);
+    };
+    addEventListener("pointermove", move);
+    addEventListener("click", click);
+    return () => { removeEventListener("pointermove", move); removeEventListener("click", click); };
+  }, []);
+  return null;
+}
+
+/** Dot field that glows around the cursor. Fills its (relative) parent; redraws only on pointer moves. */
+export function DotGrid() {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const cv = ref.current!, box = cv.parentElement!, ctx = cv.getContext("2d")!;
+    const gap = 26;
+    let W = 0, H = 0, mx = -999, my = -999;
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (let x = gap / 2; x < W; x += gap)
+        for (let y = gap / 2; y < H; y += gap) {
+          const k = Math.max(0, 1 - Math.hypot(x - mx, y - my) / 150);
+          ctx.beginPath();
+          ctx.arc(x, y, 1.3 + k * 3, 0, 7);
+          ctx.fillStyle = k > 0 ? `rgba(255,219,30,${0.25 + k * 0.75})` : "rgba(255,255,255,0.12)";
+          ctx.fill();
+        }
+    };
+    const size = () => {
+      const d = devicePixelRatio || 1;
+      W = box.clientWidth; H = box.clientHeight;
+      cv.width = W * d; cv.height = H * d;
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      draw();
+    };
+    const move = (e: PointerEvent) => {
+      const r = box.getBoundingClientRect();
+      mx = e.clientX - r.left; my = e.clientY - r.top;
+      requestAnimationFrame(draw);
+    };
+    const leave = () => { mx = my = -999; requestAnimationFrame(draw); };
+    const ro = new ResizeObserver(size);
+    ro.observe(box);
+    box.addEventListener("pointermove", move);
+    box.addEventListener("pointerleave", leave);
+    return () => { ro.disconnect(); box.removeEventListener("pointermove", move); box.removeEventListener("pointerleave", leave); };
+  }, []);
+  return <canvas ref={ref} aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />;
+}
+
+/** Letters near the cursor lift and turn yellow. */
+export function Wave({ text }: { text: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const move = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    for (const l of ref.current!.children as HTMLCollectionOf<HTMLElement>) {
+      const r = l.getBoundingClientRect();
+      const k = Math.max(0, 1 - Math.abs(e.clientX - (r.left + r.width / 2)) / 140);
+      l.style.transform = `translateY(${-k * 0.12}em)`;
+      l.style.color = k > 0.55 ? "var(--color-sun)" : "";
+    }
+  };
+  const leave = () => {
+    for (const l of ref.current!.children as HTMLCollectionOf<HTMLElement>) { l.style.transform = ""; l.style.color = ""; }
+  };
+  return (
+    <span ref={ref} onPointerMove={move} onPointerLeave={leave} aria-label={text} className="wave">
+      {[...text].map((c, i) => <span key={i} aria-hidden>{c}</span>)}
+    </span>
+  );
+}

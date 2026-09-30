@@ -48,7 +48,53 @@ h1, h2, h3 {
 .float { animation: float 5s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
+/* ---- mouse effects ---- */
+.wave > span { display: inline-block; transition: transform 0.25s ease-out, color 0.25s; }
+
+[data-glow] { position: relative; }
+[data-glow]::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 2.5px; pointer-events: none;
+  background: radial-gradient(300px circle at var(--x, 50%) var(--y, 50%), var(--color-sun), #e6bf00 25%, #8f95d6 55%, transparent 75%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity 0.3s;
+}
+[data-glow]:hover::after { opacity: 1; }
+
+[data-fill] { position: relative; overflow: hidden; isolation: isolate; }
+[data-fill]::before {
+  content: ""; position: absolute; left: var(--x, 50%); top: var(--y, 50%); z-index: -1;
+  width: 0; height: 0; border-radius: 50%; background: var(--color-sun);
+  transform: translate(-50%, -50%); transition: width 0.5s ease, height 0.5s ease;
+}
+[data-fill]:hover { color: var(--color-ink-deep); border-color: var(--color-sun); }
+[data-fill]:hover::before { width: 520px; height: 520px; }
+
+[data-ripple] { position: relative; overflow: hidden; }
+.rp {
+  position: absolute; width: 30px; height: 30px; border-radius: 50%; pointer-events: none;
+  background: rgba(255, 255, 255, 0.6); transform: translate(-50%, -50%) scale(0);
+  animation: rp 0.7s ease-out forwards;
+}
+@keyframes rp { to { transform: translate(-50%, -50%) scale(16); opacity: 0; } }
+
+.flash-lit {
+  clip-path: circle(0px at var(--x, 50%) var(--y, 50%));
+  transition: clip-path 0.2s ease-out;
+}
+[data-flash]:hover .flash-lit { clip-path: circle(150px at var(--x, 50%) var(--y, 50%)); }
+@media (hover: none) { .flash-lit { clip-path: none; } }
+
+.sweep { position: relative; }
+.sweep::after {
+  content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.2rem; height: 2px; border-radius: 2px;
+  background: var(--color-sun); transform: scaleX(0); transform-origin: right; transition: transform 0.35s ease;
+}
+.sweep:hover::after { transform: scaleX(1); transform-origin: left; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee, .marquee-rev, .float, .shimmer { animation: none; }
+  .marquee, .marquee-rev, .float, .shimmer, .rp { animation: none; }
+  .wave > span, [data-fill]::before, .flash-lit, .sweep::after { transition: none; }
 }
