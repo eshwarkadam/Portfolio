@@ -261,6 +261,7 @@ export function Nav() {
   const [active, setActive] = useState("");
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [onHero, setOnHero] = useState(true);
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
@@ -270,6 +271,7 @@ export function Nav() {
     const onScroll = () => {
       const y = scrollY;
       setSolid(y > 40);
+      setOnHero(y < innerHeight - 120);
       setHidden(y > 300 && y > last + 4 ? true : y < last - 4 ? false : (h) => h);
       last = y;
     };
@@ -298,15 +300,15 @@ export function Nav() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: hidden && !open ? -90 : 0, opacity: 1 }}
         transition={{ duration: 0.45, ease }}
-        className={`fixed top-5 right-8 z-50 hidden rounded-full p-1 text-sm backdrop-blur-md transition-colors duration-300 md:block ${
-          solid ? "bg-white/95 shadow-[0_12px_36px_-12px_rgba(47,52,87,0.35)]" : "bg-white/70 shadow-[0_10px_30px_-14px_rgba(47,52,87,0.25)]"
+        className={`fixed top-5 right-8 z-50 hidden rounded-full p-1 text-sm font-medium transition-all duration-300 md:block ${
+          solid && !onHero ? "backdrop-blur-md" : ""
         }`}
       >
         <nav className="flex items-center" aria-label="Main">
           {navItems.map(({ label, id }) => (
             <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}
-               className={`relative isolate rounded-full px-3.5 py-1.5 transition-colors duration-200 ${active === id ? "text-ink-deep" : "text-ink hover:bg-lav/50 hover:text-ink-deep"}`}>
-              {active === id && (
+               className={`relative isolate rounded-full px-3.5 py-1.5 transition-colors duration-300 ${onHero ? "text-white/85 [text-shadow:0_1px_8px_rgba(0,0,0,0.35)] hover:bg-white/15 hover:text-white" : active === id ? "text-ink-deep" : "text-ink hover:bg-lav/50 hover:text-ink-deep"}`}>
+              {active === id && !onHero && (
                 <motion.span layoutId="nav-pill" transition={{ type: "spring", stiffness: 380, damping: 32 }}
                              className="absolute inset-0 -z-10 rounded-full bg-lav" />
               )}
