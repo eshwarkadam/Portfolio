@@ -81,14 +81,14 @@ export function Logo({ name }: { name: string }) {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease, delay: 0.2 }}
       whileHover={{ y: -2, scale: 1.03 }}
-      className="group fixed top-5 left-5 z-50 overflow-hidden rounded-2xl bg-white/90 px-4 py-2 leading-tight shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(47,52,87,0.45)] md:left-8"
+      className="group fixed top-4 left-4 z-50 overflow-hidden rounded-xl bg-white/90 px-3 py-1.5 leading-tight md:top-5 md:rounded-2xl md:px-4 md:py-2 shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(47,52,87,0.45)] md:left-8"
     >
       <span className="shimmer pointer-events-none absolute inset-0" aria-hidden />
-      <span className="relative block font-display text-base font-extrabold text-ink-deep">
+      <span className="relative block font-display text-sm font-extrabold text-ink-deep md:text-base">
         {name}
         <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 rounded bg-sun transition-all duration-500 group-hover:w-full" />
       </span>
-      <span className="relative block h-3.5 overflow-hidden text-[10px] font-medium tracking-[0.18em] text-mute uppercase">
+      <span className="relative block h-3 overflow-hidden text-[8px] font-medium tracking-[0.16em] md:h-3.5 md:text-[10px] md:tracking-[0.18em] text-mute uppercase">
         <AnimatePresence mode="wait">
           <motion.span key={roles[i]} className="block" initial={{ y: "100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: "-100%", opacity: 0 }} transition={{ duration: 0.35, ease }}>
             {roles[i]}

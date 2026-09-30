@@ -31,13 +31,13 @@ export default function Home() {
     <>
       {/* NAV */}
       <Logo name={`${me.first} ${me.last}`} />
-      <header className="fixed top-5 right-5 z-50 flex items-center gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
+      <header className="fixed top-4 right-4 z-50 md:top-5 flex items-center gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
         <nav className="hidden items-center md:flex">
           {["About", "Services", "Skills", "Experience", "Work", "Contact"].map((l) => (
             <a key={l} href={`#${l.toLowerCase()}`} className="rounded-full px-3 py-1.5 transition hover:bg-lav">{l}</a>
           ))}
         </nav>
-        <a href={`mailto:${me.email}`} className="rounded-full bg-ink px-4 py-1.5 font-medium text-white transition hover:bg-ink-deep">Say hello</a>
+        <a href={`mailto:${me.email}`} className="rounded-full bg-ink px-3 py-1 text-xs font-medium text-white md:px-4 md:py-1.5 md:text-sm transition hover:bg-ink-deep">Say hello</a>
       </header>
 
       <main id="top">
