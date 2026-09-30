@@ -55,6 +55,9 @@ export default function Home() {
                   View my work
                   <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
                 </a>
+                <a data-fill data-ripple href="/Eshwar-Kadam-Resume.pdf" download className="ml-2 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/10 px-5 py-2.5 font-medium text-white backdrop-blur-sm transition">
+                  Download CV <span aria-hidden>↓</span>
+                </a>
                 <p className="mt-5 hidden max-w-sm text-white/85 sm:block">
                   Software Engineer building scalable products across mobile, web and cloud, from clean code to production on Google Cloud.
                 </p>
@@ -271,9 +274,9 @@ export default function Home() {
               </a>
             </Magnetic>
             <ul className="relative mt-6 flex flex-wrap justify-center gap-2 text-sm">
-              {[["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
+              {[["Download CV", "/Eshwar-Kadam-Resume.pdf"], ["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
                 <li key={l}>
-                  <a href={h} target={h.startsWith("http") ? "_blank" : undefined} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-4 py-2 transition">{l} ↗</a>
+                  <a href={h} target={h.startsWith("http") ? "_blank" : undefined} download={h.endsWith(".pdf") || undefined} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-4 py-2 transition">{l} {h.endsWith(".pdf") ? "↓" : "↗"}</a>
                 </li>
               ))}
             </ul>
