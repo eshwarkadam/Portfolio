@@ -73,7 +73,7 @@ export default function Home() {
         <section id="about" className="mx-auto grid max-w-6xl gap-12 px-5 py-28 md:grid-cols-2">
           <Reveal>
             <Eyebrow>About me</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">I turn ideas<br />into <Em>working apps.</Em></h2>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">I engineer software<br />that <Em>ships and scales.</Em></h2>
             <div className="mt-10 flex items-center gap-5">
               <div className="relative size-32 overflow-hidden rounded-3xl bg-lav">
                 <Image src="/headshot.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
