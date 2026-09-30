@@ -66,8 +66,8 @@ export const toolkit: { title: string; note: string; bg: string; icon: IconType;
 ];
 
 export const jobs = [
-  { role: "Software Engineer", where: "Anireysoft · Pune", when: "Sep 2024 - Present", current: true },
-  { role: "Android Developer Intern", where: "Anireysoft · Pune", when: "Mar 2024 - Sep 2024" },
+  { role: "Software Engineer", where: "VKS Infotech Pvt. Ltd. (Anireysoft) · Pune", when: "Sep 2024 - Present", current: true },
+  { role: "Android Developer Intern", where: "VKS Infotech Pvt. Ltd. (Anireysoft) · Pune", when: "Mar 2024 - Sep 2024" },
 ];
 
 export const highlights = [

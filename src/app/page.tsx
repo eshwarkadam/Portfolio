@@ -184,7 +184,7 @@ export default function Home() {
             </div>
           </div>
           <div className="space-y-20 md:pt-40">
-            <Eyebrow>Highlights from Anireysoft</Eyebrow>
+            <Eyebrow>Highlights from VKS Infotech</Eyebrow>
             {highlights.map((h) => (
               <Reveal key={h.title}>
                 <h3 className="text-4xl font-medium md:text-5xl">{h.title}</h3>
