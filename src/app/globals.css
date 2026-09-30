@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f8f9fc;
+  --color-ink: #454c76;
+  --color-ink-deep: #2f3457;
+  --color-mute: #6a6f93;
+  --color-sun: #ffdb1e;
+  --color-lav: #e2e2f3;
+  --color-butter: #f6eaa2;
+  --color-sage: #dce7dc;
+  --color-peach: #eee0d7;
+  --color-peri: #c6c8ee;
+  --font-display: var(--nf-display);
+  --font-sans: var(--nf-sans);
+  --font-serif: var(--nf-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+body {
+  font-family: var(--nf-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+h1, h2, h3 {
+  font-family: var(--nf-display), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+::selection {
+  background: var(--color-sun);
+  color: var(--color-ink-deep);
+}
+
+.marquee { animation: marquee 35s linear infinite; }
+.marquee-rev { animation: marquee 35s linear infinite reverse; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.float { animation: float 5s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee, .marquee-rev, .float { animation: none; }
+}
