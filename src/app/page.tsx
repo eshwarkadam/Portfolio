@@ -153,7 +153,7 @@ export default function Home() {
         </section>
 
         {/* TERMINAL */}
-        <section aria-label="Interactive terminal" className="mx-auto max-w-6xl px-5 py-10">
+        <section aria-label="Interactive terminal" className="mx-auto max-w-4xl px-5 py-6">
           <Terminal />
         </section>
 

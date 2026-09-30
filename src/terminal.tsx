@@ -68,11 +68,10 @@ export function Terminal() {
   };
 
   return (
-    <div className="rounded-[2rem] bg-[#1c2040] p-5 md:p-8">
-      <div className="flex flex-wrap items-end justify-between gap-3 px-1 pb-5">
+    <div className="rounded-[1.75rem] bg-[#1c2040] p-4 md:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-1 pb-3">
         <div>
-          <p className="text-xs font-medium tracking-[0.2em] text-white/50 uppercase">Interactive · for the curious</p>
-          <h3 className="mt-2 font-display text-3xl font-extrabold text-white md:text-4xl">
+          <h3 className="font-display text-2xl font-extrabold text-white md:text-3xl">
             Ask my <span className="text-sun">terminal.</span>
           </h3>
         </div>
@@ -80,13 +79,13 @@ export function Terminal() {
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1226]" onClick={() => field.current?.focus()}>
-        <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+        <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-2">
           <span className="size-3 rounded-full bg-[#ff6b6b]" />
           <span className="size-3 rounded-full bg-sun" />
           <span className="size-3 rounded-full bg-green-400" />
           <span className="ml-3 font-mono text-xs text-white/40">eshwar@portfolio: ~</span>
         </div>
-        <div ref={out} aria-live="polite" className="h-64 overflow-y-auto px-5 py-4 font-mono text-[13px] leading-6 whitespace-pre-wrap text-[#d6d9ff] md:text-sm">
+        <div ref={out} aria-live="polite" className="h-36 overflow-y-auto px-5 py-3 md:h-40 font-mono text-[13px] leading-6 whitespace-pre-wrap text-[#d6d9ff] md:text-sm">
           {lines.map((l, i) =>
             l.kind === "cmd" ? (
               <div key={i}><span className="text-sun">➜</span> {l.text}</div>
@@ -102,7 +101,7 @@ export function Terminal() {
             run(input);
             setInput("");
           }}
-          className="flex items-center gap-2 px-5 pb-4 font-mono text-sm"
+          className="flex items-center gap-2 px-5 pb-3 font-mono text-sm"
         >
           <span className="text-sun">➜</span>
           <input
@@ -131,13 +130,13 @@ export function Terminal() {
         </form>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-2">
         {chips.map((c) => (
           <button
             key={c}
             type="button"
             onClick={() => run(c)}
-            className={`rounded-full border px-4 py-1.5 font-mono text-[13px] transition ${
+            className={`rounded-full border px-3 py-1 font-mono text-xs transition ${
               c === "hire" ? "border-sun/60 text-sun hover:bg-sun hover:text-ink-deep" : "border-white/15 bg-white/5 text-white hover:border-sun hover:text-sun"
             }`}
           >
