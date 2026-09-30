@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Terminal } from "@/terminal";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
 import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
@@ -150,11 +149,6 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-        </section>
-
-        {/* TERMINAL */}
-        <section aria-label="Interactive terminal" className="mx-auto max-w-4xl px-5 py-6">
-          <Terminal />
         </section>
 
         {/* EXPERIENCE */}
