@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://eshwarkadam.com"),
   title: "Eshwar Kadam | Android & Full-Stack Engineer",
   description:
-    "Kotlin, Jetpack Compose, Ktor and React. Builder of an end-to-end CBSE maths learning platform.",
+    "Android & full-stack engineer in Pune: Kotlin, Jetpack Compose, Ktor, React and AI.",
   openGraph: { images: ["/about.jpg"] },
 };
 

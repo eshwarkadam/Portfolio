@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { chips, education, highlights, impact, jobs, me, projects, ribbon, ribbon2, toolkit } from "@/content";
+import { chips, education, highlights, jobs, me, projects, ribbon, ribbon2, toolkit } from "@/content";
 import { Magnetic, MaskLine, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
@@ -64,7 +64,7 @@ export default function Home() {
         <section id="about" className="mx-auto grid max-w-6xl gap-12 px-5 py-28 md:grid-cols-2">
           <Reveal>
             <Eyebrow>About me</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">I turn curricula<br />into <Em>working apps.</Em></h2>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">I turn ideas<br />into <Em>working apps.</Em></h2>
             <div className="mt-10 flex items-center gap-5">
               <div className="relative size-32 overflow-hidden rounded-3xl bg-lav">
                 <Image src="/headshot.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
@@ -76,9 +76,9 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.1} className="md:pt-12">
-            <p className="text-2xl leading-snug">As an Android engineer, I build the whole path from a student&apos;s tap to the server and back.</p>
+            <p className="text-2xl leading-snug">As an Android engineer, I build the whole path from a user&apos;s tap to the server and back.</p>
             <p className="mt-5 leading-relaxed text-mute">
-              Most of my work is a CBSE maths learning platform: a Kotlin & Compose app, a Ktor question engine on PostgreSQL, and a React portal for students and admins, all backed by Firebase.
+              Most of my work is end-to-end products: Kotlin & Compose apps, Ktor APIs on PostgreSQL and React dashboards, all backed by Firebase, and now with AI built in.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-3">
               {[["Experience", "2+", "years building apps", "bg-lav"], ["Apps built", "10+", "mobile apps shipped", "bg-butter"], ["Projects", "15+", "completed end to end", "bg-sage"]].map(([k, v, s, bg]) => (
@@ -105,8 +105,8 @@ export default function Home() {
             <p className="mx-auto mt-6 max-w-xl text-mute">Good apps come from boring, reliable engineering. Here is what I bring to every build:</p>
           </Reveal>
           <div className="relative mx-auto mt-14 max-w-4xl">
-            <Reveal className="relative mx-auto h-[460px] w-[300px] overflow-hidden rounded-t-full md:h-[520px] md:w-[340px]">
-              <Image src="/portrait.jpg" alt="" fill sizes="340px" className="object-cover [mask-image:linear-gradient(to_bottom,black_70%,transparent)]" />
+            <Reveal className="mx-auto w-[320px] md:w-[440px]">
+              <Image src="/cutout.webp" alt="" width={883} height={872} sizes="440px" className="h-auto w-full [mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
             </Reveal>
             <ul className="mt-8 flex flex-wrap justify-center gap-3 md:mt-0">
               {chips.map((c, i) => (
@@ -155,15 +155,6 @@ export default function Home() {
                   </div>
                   <p className="mt-2 w-fit border-b border-ink/30 pb-1">{j.where}</p>
                   <p className="mt-3 text-sm text-mute">{j.when}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-8 mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">Impact at Anireysoft</p>
-            <div className="grid grid-cols-3 gap-3">
-              {impact.map((s) => (
-                <div key={s.label} className={`rounded-3xl p-4 ${s.bg}`}>
-                  <p className="font-display text-4xl">{s.value}</p>
-                  <p className="mt-1 text-sm text-mute">{s.label}</p>
                 </div>
               ))}
             </div>

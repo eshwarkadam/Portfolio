@@ -18,14 +18,14 @@ export const ribbon = [
   "Kotlin", "Jetpack Compose", "Ktor", "PostgreSQL", "Firebase", "React", "Coroutines", "MVVM", "Docker",
 ];
 export const ribbon2 = [
-  "Android", "Clean architecture", "REST APIs", "Real-time sync", "Ed-tech", "Offline-first", "Bilingual UI",
+  "Android", "Clean architecture", "REST APIs", "Real-time sync", "AI features", "Offline-first", "Localization",
 ];
 
 export const chips = [
   { text: "Ship native apps in", bold: "Kotlin & Compose", bg: "bg-lav" },
-  { text: "Generate questions with", bold: "78+ algorithms", bg: "bg-sage" },
+  { text: "Add smart features with", bold: "Gemini & LLMs", bg: "bg-sage" },
   { text: "Keep data in", bold: "real-time sync", bg: "bg-butter" },
-  { text: "Speak to students in", bold: "English & मराठी", bg: "bg-peach" },
+  { text: "Reach users in", bold: "any language", bg: "bg-peach" },
 ];
 
 type Tool = { name: string; icon?: IconType };
@@ -39,7 +39,7 @@ export const toolkit: { title: string; note: string; bg: string; icon: IconType;
     tools: [{ name: "Ktor", icon: SiKtor }, { name: "Coroutines" }, { name: "PostgreSQL", icon: SiPostgresql }, { name: "SQL" }, { name: "REST APIs" }, { name: "Node.js", icon: SiNodedotjs }, { name: "Docker", icon: SiDocker }],
   },
   {
-    title: "Web", note: "Dashboards for students and admins.", bg: "bg-sage", icon: SiReact,
+    title: "Web", note: "Dashboards and admin panels.", bg: "bg-sage", icon: SiReact,
     tools: [{ name: "React", icon: SiReact }, { name: "Material-UI", icon: SiMui }, { name: "Recharts" }, { name: "Vite", icon: SiVite }, { name: "Axios", icon: SiAxios }],
   },
   {
@@ -58,16 +58,10 @@ export const jobs = [
 ];
 
 export const highlights = [
-  { title: "End-to-end platform", text: "Built a CBSE maths learning platform across Android, web and a Kotlin/Ktor backend, from first screen to production." },
-  { title: "Question engine", text: "Designed 78+ maths question-generation algorithms that create personalised practice on demand." },
-  { title: "Real-time & bilingual", text: "Integrated real-time data sync, push notifications and full English & Marathi support." },
+  { title: "End-to-end products", text: "Build Android apps, web dashboards and Kotlin/Ktor backends end to end, from first screen to production." },
+  { title: "Scalable backends", text: "Design REST APIs with Ktor and PostgreSQL, with caching, auth and Dockerised deploys." },
+  { title: "Real-time & multilingual", text: "Ship real-time data sync, push notifications and multi-language support." },
   { title: "Solid foundations", text: "Started as an intern shipping core Kotlin/XML screens with MVVM, Firebase Auth, Firestore and Retrofit." },
-];
-
-export const impact = [
-  { value: "78+", label: "question algorithms", bg: "bg-lav" },
-  { value: "10x", label: "buffer caching", bg: "bg-butter" },
-  { value: "3", label: "platforms shipped", bg: "bg-sage" },
 ];
 
 export const projects = [
