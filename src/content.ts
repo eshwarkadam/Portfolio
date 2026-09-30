@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import {
-  SiAndroid, SiAndroidstudio, SiGooglecloud, SiGooglecloudstorage, SiGooglepubsub, SiAnthropic, SiHuggingface, SiModelcontextprotocol, SiTensorflow, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiJavascript, SiIntellijidea, SiNodedotjs, SiOpenjdk,
+  SiAndroid, SiAndroidstudio, SiCloudflare, SiFastapi, SiNextdotjs, SiPython, SiSqlite, SiTailwindcss, SiGooglecloud, SiGooglecloudstorage, SiGooglepubsub, SiClaude, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiJavascript, SiIntellijidea, SiNodedotjs, SiOpenjdk,
   SiJetpackcompose, SiKotlin, SiKtor, SiMui, SiPostgresql, SiPostman, SiReact, SiVite,
 } from "react-icons/si";
 
@@ -33,7 +33,7 @@ export const services = [
   {
     n: "04", title: "AI features", bg: "bg-peach", icon: SiGooglegemini,
     text: "Add Gemini-powered features to apps: smart assistants, summaries and chat grounded in your own data.",
-    points: ["Gemini API", "RAG", "On-device AI"],
+    points: ["Gemini & Claude APIs", "RAG", "LLM routing"],
   },
 ];
 
@@ -57,7 +57,7 @@ export const toolkit: { title: string; note: string; bg: string; icon: IconType;
   },
   {
     title: "AI", note: "Practical AI features inside real products.", bg: "bg-peri", icon: SiGooglegemini,
-    tools: [{ name: "Gemini API", icon: SiGooglegemini }, { name: "Google Generative AI" }, { name: "Prompt design" }, { name: "RAG" }, { name: "Tool calling" }, { name: "MCP", icon: SiModelcontextprotocol }],
+    tools: [{ name: "Gemini API", icon: SiGooglegemini }, { name: "Google Generative AI" }, { name: "Prompt design" }, { name: "Claude API", icon: SiClaude }, { name: "RAG" }, { name: "Embeddings" }],
   },
   {
     title: "Workflow", note: "Tools for building, testing and shipping.", bg: "bg-lav", icon: SiGit,
@@ -79,36 +79,40 @@ export const highlights = [
 
 export const projects = [
   {
-    kind: "On-device AI · Android",
-    title: "Pocket AI Assistant",
-    desc: "Offline-first Android assistant running Gemini Nano on the device: summarises notes, drafts replies and answers questions with no network and no data leaving the phone. Falls back to cloud Gemini for longer tasks.",
-    tags: ["Kotlin", "Jetpack Compose", "Gemini Nano", "ML Kit GenAI", "Room DB", "Coroutines"],
-    icons: [SiAndroid, SiGooglegemini, SiKotlin, SiTensorflow],
-    file: "Assistant.kt",
-    code: ["val model = GenerativeModel(\"gemini-nano\")", "", "suspend fun summarise(note: String) =", "  model.generateContent(\"Summarise: $note\")", "    .text ?: fallbackToCloud(note)"],
+    kind: "AI Backend · Kotlin",
+    title: "Kotlin AI Router",
+    desc: "Ktor service that puts one interface in front of several LLM vendors (Gemini, Claude). Each purpose gets its own model and failover chain, with retries on transient errors and per-call token and cost telemetry.",
+    tags: ["Kotlin", "Ktor", "Coroutines", "Gemini API", "Claude API", "Docker"],
+    icons: [SiKotlin, SiKtor, SiGooglegemini, SiDocker],
     bg: "bg-lav",
+    link: "https://github.com/eshwarkadam/kotlin-ai-router",
+    file: "Router.kt",
+    code: ["suspend fun complete(purpose: String, prompt: String)", "  : Completion {", "  for (step in chain(purpose)) {", "    val p = providers[step.provider] ?: continue", "    runCatching { return p.complete(prompt, step.model) }", "  }", "  error(\"all providers failed\")", "}"],
   },
   {
-    kind: "RAG · Backend",
-    title: "DocChat RAG API",
-    desc: "Ktor service that lets you chat with your own PDFs and docs. Chunks and embeds files into PostgreSQL + pgvector, retrieves the right passages and streams grounded, cited answers over SSE.",
-    tags: ["Kotlin", "Ktor", "PostgreSQL", "pgvector", "Embeddings", "Docker"],
-    icons: [SiKtor, SiPostgresql, SiHuggingface, SiDocker],
-    file: "ChatRoute.kt",
-    code: ["post(\"/chat\") {", "  val q = call.receive<Question>()", "  val docs = vectors.search(embed(q.text), k = 5)", "  call.respondSse(llm.stream(q, context = docs))", "}"],
+    kind: "RAG · Python",
+    title: "RAG Starter",
+    desc: "Ask questions about your own PDFs and get answers with citations to the document and page. Boundary-aware chunking with overlap, Gemini embeddings, SQLite vector search and grounded answers served by FastAPI.",
+    tags: ["Python", "FastAPI", "Gemini Embeddings", "SQLite", "RAG", "Docker"],
+    icons: [SiPython, SiFastapi, SiSqlite, SiGooglegemini],
     bg: "bg-butter",
+    link: "https://github.com/eshwarkadam/rag-starter",
+    file: "rag.py",
+    code: ["async def ask(self, question: str) -> Answer:", "    vec = self._embedder.embed(question)", "    hits = self._store.search(vec, k=5)", "    text = await self._generate(question, hits)", "    return Answer(text, hits, grounded=bool(hits))"],
   },
   {
-    kind: "AI Agents · Full-stack",
-    title: "Agentic Task Automator",
-    desc: "LLM agent that plans and runs multi-step tasks through tool calling, with a Kotlin MCP server exposing app tools and a React dashboard to watch, approve and replay every step.",
-    tags: ["Kotlin", "MCP", "Tool calling", "LLM APIs", "React", "Firebase"],
-    icons: [SiModelcontextprotocol, SiAnthropic, SiReact, SiKotlin],
-    file: "Agent.kt",
-    code: ["val tools = mcpServer.listTools()", "", "while (!task.done) {", "  val step = llm.plan(task, tools)", "  task.log(approve(step).run())", "}"],
+    kind: "Web · Frontend",
+    title: "Portfolio Website",
+    desc: "This site: a Next.js and Tailwind CSS portfolio with scroll and mouse-driven animations, statically exported and deployed on Cloudflare with automatic deploys from GitHub.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Cloudflare"],
+    icons: [SiNextdotjs, SiReact, SiTailwindcss, SiCloudflare],
     bg: "bg-sage",
+    link: "https://github.com/eshwarkadam/Portfolio",
+    file: "page.tsx",
+    code: ["<Reveal>", "  <h2>Turning complexity", "    into <Em>clean software.</Em>", "  </h2>", "</Reveal>"],
   },
 ];
+
 
 export const education = [
   { title: "M.Sc. Computer Science", where: "Advanced algorithms, software engineering, mobile development", meta: "2023 - 2025", score: "CGPA 8.5" },

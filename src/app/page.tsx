@@ -197,8 +197,8 @@ export default function Home() {
         {/* WORK */}
         <section id="work" className="mx-auto max-w-6xl px-5 py-24">
           <Reveal className="mb-12">
-            <Eyebrow>AI projects</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Putting AI<br /><Em>where it&apos;s useful.</Em></h2>
+            <Eyebrow>Projects</Eyebrow>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Things I&apos;ve built<br /><Em>and open-sourced.</Em></h2>
           </Reveal>
           {projects.map((p, i) => (
             <StackCard key={p.title} i={i} total={projects.length}>
@@ -209,6 +209,7 @@ export default function Home() {
                     <h3 className="mt-auto text-4xl leading-tight font-medium md:text-6xl">{p.title}</h3>
                     <p className="mt-4 leading-relaxed text-mute">{p.desc}</p>
                     <ul className="mt-6 flex flex-wrap gap-2">{p.tags.map((t) => <Pill key={t}>{t}</Pill>)}</ul>
+                    <a data-fill data-ripple href={p.link} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition">View on GitHub ↗</a>
                   </div>
                   <div className="relative hidden flex-col justify-center gap-6 border-l border-ink/10 p-10 md:flex">
                     <div className="overflow-hidden rounded-2xl bg-ink-deep shadow-[0_30px_60px_-25px_rgba(47,52,87,0.6)] transition duration-500 group-hover:-rotate-1">
