@@ -140,7 +140,7 @@ export default function Home() {
         <section id="skills" className="mx-auto max-w-6xl px-5 py-24">
           <Reveal>
             <Eyebrow>Toolkit</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Different layers.<br /><Em>The same app.</Em></h2>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Every layer.<br /><Em>One clean system.</Em></h2>
           </Reveal>
           <div className="mt-12 grid gap-4 md:grid-cols-6">
             {toolkit.map((t, i) => (

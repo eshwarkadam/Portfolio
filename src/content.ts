@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import {
-  SiAndroid, SiAndroidstudio, SiGooglecloud, SiGooglecloudstorage, SiGooglepubsub, SiAnthropic, SiHuggingface, SiModelcontextprotocol, SiTensorflow, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiIntellijidea, SiNodedotjs, SiOpenjdk,
+  SiAndroid, SiAndroidstudio, SiGooglecloud, SiGooglecloudstorage, SiGooglepubsub, SiAnthropic, SiHuggingface, SiModelcontextprotocol, SiTensorflow, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiJavascript, SiIntellijidea, SiNodedotjs, SiOpenjdk,
   SiJetpackcompose, SiKotlin, SiKtor, SiMui, SiPostgresql, SiPostman, SiReact, SiVite,
 } from "react-icons/si";
 
@@ -38,30 +38,30 @@ export const services = [
 ];
 
 type Tool = { name: string; icon?: IconType };
-export const toolkit: { title: string; note: string; bg: string; icon: IconType; tools: Tool[]; }[] = [
+export const toolkit: { title: string; note: string; bg: string; icon: IconType; tools: Tool[] }[] = [
   {
-    title: "Android", note: "Native apps that feel fast on cheap phones.", bg: "bg-lav", icon: SiAndroid,
-    tools: [{ name: "Kotlin", icon: SiKotlin }, { name: "Java", icon: SiOpenjdk }, { name: "Jetpack Compose", icon: SiJetpackcompose }, { name: "XML layouts" }, { name: "MVVM" }, { name: "ViewModel & LiveData" }, { name: "Navigation" }, { name: "Room DB" }, { name: "Retrofit" }, { name: "ExoPlayer" }],
+    title: "Mobile", note: "Native Android apps with clean, testable architecture.", bg: "bg-lav", icon: SiAndroid,
+    tools: [{ name: "Kotlin", icon: SiKotlin }, { name: "Java", icon: SiOpenjdk }, { name: "Jetpack Compose", icon: SiJetpackcompose }, { name: "MVVM" }, { name: "Room DB" }, { name: "Retrofit" }],
   },
   {
-    title: "Backend", note: "APIs that generate, cache and serve content.", bg: "bg-butter", icon: SiKtor,
-    tools: [{ name: "Ktor", icon: SiKtor }, { name: "Coroutines" }, { name: "PostgreSQL", icon: SiPostgresql }, { name: "SQL" }, { name: "REST APIs" }, { name: "Node.js", icon: SiNodedotjs }, { name: "Docker", icon: SiDocker }],
+    title: "Backend", note: "Fast, secure REST APIs and data layers.", bg: "bg-butter", icon: SiKtor,
+    tools: [{ name: "Ktor", icon: SiKtor }, { name: "Coroutines" }, { name: "Node.js", icon: SiNodedotjs }, { name: "REST APIs" }, { name: "PostgreSQL", icon: SiPostgresql }, { name: "SQL" }],
   },
   {
-    title: "Web", note: "Dashboards and admin panels.", bg: "bg-sage", icon: SiReact,
-    tools: [{ name: "React", icon: SiReact }, { name: "Material-UI", icon: SiMui }, { name: "Recharts" }, { name: "Vite", icon: SiVite }, { name: "Axios", icon: SiAxios }],
+    title: "Web", note: "Responsive dashboards and admin panels.", bg: "bg-sage", icon: SiReact,
+    tools: [{ name: "React", icon: SiReact }, { name: "JavaScript", icon: SiJavascript }, { name: "Material-UI", icon: SiMui }, { name: "Vite", icon: SiVite }, { name: "Axios", icon: SiAxios }, { name: "Recharts" }],
   },
   {
-    title: "Cloud & AI", note: "Auth, push, LLMs, RAG and on-device AI.", bg: "bg-peach", icon: SiFirebase,
-    tools: [{ name: "Firebase Auth", icon: SiFirebase }, { name: "Firestore" }, { name: "Cloud Messaging" }, { name: "Firebase Admin" }, { name: "Google Generative AI", icon: SiGooglegemini }, { name: "Gemini Nano" }, { name: "RAG & embeddings" }, { name: "LLM tool calling" }, { name: "MCP", icon: SiModelcontextprotocol }],
+    title: "Cloud & DevOps", note: "Deploy, scale and monitor in production.", bg: "bg-peach", icon: SiGooglecloud,
+    tools: [{ name: "Cloud Run", icon: SiGooglecloud }, { name: "Cloud SQL" }, { name: "Cloud Storage", icon: SiGooglecloudstorage }, { name: "Pub/Sub", icon: SiGooglepubsub }, { name: "Firebase", icon: SiFirebase }, { name: "Docker", icon: SiDocker }],
   },
   {
-    title: "Google Cloud", note: "Deploy, scale and run services on GCP.", bg: "bg-lav", icon: SiGooglecloud,
-    tools: [{ name: "Cloud Run", icon: SiGooglecloud }, { name: "Cloud Functions" }, { name: "Cloud SQL" }, { name: "Cloud Storage", icon: SiGooglecloudstorage }, { name: "Pub/Sub", icon: SiGooglepubsub }, { name: "Artifact Registry" }, { name: "Cloud Build" }, { name: "IAM" }],
+    title: "AI", note: "Practical AI features inside real products.", bg: "bg-peri", icon: SiGooglegemini,
+    tools: [{ name: "Gemini API", icon: SiGooglegemini }, { name: "Google Generative AI" }, { name: "Prompt design" }, { name: "RAG" }, { name: "Tool calling" }, { name: "MCP", icon: SiModelcontextprotocol }],
   },
   {
-    title: "Everyday tools", note: "Where the work actually happens.", bg: "bg-peri", icon: SiAndroidstudio,
-    tools: [{ name: "Android Studio", icon: SiAndroidstudio }, { name: "IntelliJ IDEA", icon: SiIntellijidea }, { name: "Git", icon: SiGit }, { name: "GitHub", icon: SiGithub }, { name: "Postman", icon: SiPostman }, { name: "Figma", icon: SiFigma }],
+    title: "Workflow", note: "Tools for building, testing and shipping.", bg: "bg-lav", icon: SiGit,
+    tools: [{ name: "Git", icon: SiGit }, { name: "GitHub", icon: SiGithub }, { name: "Android Studio", icon: SiAndroidstudio }, { name: "IntelliJ IDEA", icon: SiIntellijidea }, { name: "Postman", icon: SiPostman }, { name: "Figma", icon: SiFigma }],
   },
 ];
 
