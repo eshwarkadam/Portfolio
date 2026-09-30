@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Eshwar Kadam | Android & Full-Stack Engineer",
   description:
     "Android & full-stack engineer in Pune: Kotlin, Jetpack Compose, Ktor, React and AI.",
-  openGraph: { images: ["/hero.jpg"] },
+  openGraph: { images: ["/hero-2.jpg"] },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
