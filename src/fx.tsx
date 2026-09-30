@@ -303,7 +303,7 @@ export function Nav() {
         <nav className="flex items-center" aria-label="Main">
           {navItems.map(({ label, id }) => (
             <a key={id} href={`#${id}`} aria-current={active === id ? "true" : undefined}
-               className={`group relative isolate rounded-full px-3.5 py-1.5 transition-colors duration-300 ${onHero ? "text-white/85 [text-shadow:0_1px_8px_rgba(0,0,0,0.35)] hover:text-white" : active === id ? "text-ink-deep" : "text-ink hover:text-ink-deep"}`}>
+               className={`group relative isolate rounded-full px-2.5 py-1.5 transition-colors duration-300 ${onHero ? "text-white/85 [text-shadow:0_1px_8px_rgba(0,0,0,0.35)] hover:text-white" : active === id ? "text-ink-deep" : "text-ink hover:text-ink-deep"}`}>
               {active === id && !onHero && (
                 <motion.span layoutId="nav-pill" transition={{ type: "spring", stiffness: 380, damping: 32 }}
                              className="absolute inset-0 -z-10 rounded-full bg-lav" />
