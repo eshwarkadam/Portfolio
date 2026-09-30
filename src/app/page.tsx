@@ -233,32 +233,32 @@ export default function Home() {
 
         {/* CONTACT */}
         <section id="contact" className="p-3">
-          <div className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-24 text-center text-white md:py-32">
+          <div className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-14 text-center text-white md:py-20">
             <DotGrid />
             <Reveal className="relative">
-              <div className="relative mx-auto mb-8 size-28 md:size-32">
-                <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="128px" className="rounded-full object-cover ring-4 ring-sun" />
-                <span className="absolute right-1 bottom-1 size-5 rounded-full border-4 border-ink bg-green-400" title="Available for work" />
+              <div className="relative mx-auto mb-5 size-20 md:size-24">
+                <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
+                <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
               </div>
-              <p className="mb-5 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
-              <h2 className="text-5xl leading-[1.05] font-medium md:text-7xl">Have an app that<br /><Em>needs building?</Em></h2>
-              <p className="mx-auto mt-6 max-w-md text-white/70">I&apos;m open to Android, Kotlin and full-stack roles. Tell me what you&apos;re working on.</p>
+              <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
+              <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have an app that<br /><Em>needs building?</Em></h2>
+              <p className="mx-auto mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to Android, Kotlin and full-stack roles. Tell me what you&apos;re working on.</p>
             </Reveal>
-            <Magnetic className="relative mx-auto mt-10 w-fit max-w-full">
-              <a data-ripple href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-2 pr-2 pl-5 text-sm font-medium text-ink-deep sm:pl-6 sm:text-base md:text-lg">
+            <Magnetic className="relative mx-auto mt-7 w-fit max-w-full">
+              <a data-ripple href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 text-sm font-medium text-ink-deep sm:text-base">
                 {me.email}
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:-rotate-45">→</span>
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:-rotate-45">→</span>
               </a>
             </Magnetic>
-            <ul className="relative mt-10 flex flex-wrap justify-center gap-3 text-sm">
+            <ul className="relative mt-6 flex flex-wrap justify-center gap-2 text-sm">
               {[["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
                 <li key={l}>
-                  <a href={h} target={h.startsWith("http") ? "_blank" : undefined} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-5 py-2.5 transition">{l} ↗</a>
+                  <a href={h} target={h.startsWith("http") ? "_blank" : undefined} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-4 py-2 transition">{l} ↗</a>
                 </li>
               ))}
             </ul>
           </div>
-          <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-5 py-8 text-sm text-mute">
+          <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-5 py-6 text-sm text-mute">
             <span>© {new Date().getFullYear()} {me.first} {me.last} · {me.location}</span>
             <a href="#top" className="sweep -mx-3 px-3 pb-1 hover:text-ink">Back to top ↑</a>
           </footer>
