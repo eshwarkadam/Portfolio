@@ -48,10 +48,6 @@ h1, h2, h3 {
 .float { animation: float 5s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
-@keyframes shrink { from { width: 100%; } to { width: 0%; } }
-.pop { transform: translate(-50%, -50%); animation: pop 0.7s ease-out forwards; }
-@keyframes pop { to { transform: translate(-50%, -160%); opacity: 0; } }
-
 /* ---- mouse effects ---- */
 .wave > span { display: inline-block; transition: transform 0.25s ease-out, color 0.25s; }
 

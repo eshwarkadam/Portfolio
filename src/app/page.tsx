@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BugGame } from "@/bug-game";
+import { Terminal } from "@/terminal";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
 import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
@@ -152,9 +152,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* BUG GAME */}
-        <section aria-label="Mini-game" className="px-3 py-10">
-          <BugGame />
+        {/* TERMINAL */}
+        <section aria-label="Interactive terminal" className="mx-auto max-w-6xl px-5 py-10">
+          <Terminal />
         </section>
 
         {/* EXPERIENCE */}
