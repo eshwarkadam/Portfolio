@@ -67,7 +67,7 @@ export default function Home() {
             <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">I turn curricula<br />into <Em>working apps.</Em></h2>
             <div className="mt-10 flex items-center gap-5">
               <div className="relative size-32 overflow-hidden rounded-3xl bg-lav">
-                <Image src="/portrait.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover object-[50%_20%]" />
+                <Image src="/headshot.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
               </div>
               <div>
                 <p className="text-lg font-medium">{me.first} {me.last}</p>
