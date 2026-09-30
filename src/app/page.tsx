@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BugGame } from "@/bug-game";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
 import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
@@ -151,12 +152,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FLASHLIGHT BANNER */}
-        <section className="px-3 py-10">
-          <div data-flash className="relative grid h-64 place-items-center overflow-hidden rounded-[2rem] bg-[#1c2040] px-6 md:h-80">
-            <p className="text-center font-display text-4xl leading-tight font-extrabold text-[#2c3160] md:text-7xl">Built for production.<br />Designed to scale.</p>
-            <p aria-hidden className="flash-lit absolute inset-0 grid place-items-center bg-gradient-to-br from-sun to-[#fff3a8] px-6 text-center font-display text-4xl leading-tight font-extrabold text-ink-deep md:text-7xl">Built for production.<br />Designed to scale.</p>
-          </div>
+        {/* BUG GAME */}
+        <section aria-label="Mini-game" className="px-3 py-10">
+          <BugGame />
         </section>
 
         {/* EXPERIENCE */}

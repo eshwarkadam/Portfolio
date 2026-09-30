@@ -100,12 +100,12 @@ export function Logo({ name }: { name: string }) {
 }
 
 /** Page-wide mouse effects via data attributes:
- *  data-glow / data-fill / data-flash get --x/--y (cursor position inside the element),
+ *  data-glow / data-fill get --x/--y (cursor position inside the element),
  *  data-ripple spawns a ripple on click. */
 export function Effects() {
   useEffect(() => {
     const move = (e: PointerEvent) => {
-      const el = (e.target as Element).closest<HTMLElement>("[data-glow],[data-fill],[data-flash]");
+      const el = (e.target as Element).closest<HTMLElement>("[data-glow],[data-fill]");
       if (!el) return;
       const r = el.getBoundingClientRect();
       el.style.setProperty("--x", `${e.clientX - r.left}px`);

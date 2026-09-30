@@ -48,6 +48,10 @@ h1, h2, h3 {
 .float { animation: float 5s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
+@keyframes shrink { from { width: 100%; } to { width: 0%; } }
+.pop { transform: translate(-50%, -50%); animation: pop 0.7s ease-out forwards; }
+@keyframes pop { to { transform: translate(-50%, -160%); opacity: 0; } }
+
 /* ---- mouse effects ---- */
 .wave > span { display: inline-block; transition: transform 0.25s ease-out, color 0.25s; }
 
@@ -79,13 +83,6 @@ h1, h2, h3 {
 }
 @keyframes rp { to { transform: translate(-50%, -50%) scale(16); opacity: 0; } }
 
-.flash-lit {
-  clip-path: circle(0px at var(--x, 50%) var(--y, 50%));
-  transition: clip-path 0.2s ease-out;
-}
-[data-flash]:hover .flash-lit { clip-path: circle(150px at var(--x, 50%) var(--y, 50%)); }
-@media (hover: none) { .flash-lit { clip-path: none; } }
-
 .navline { position: relative; }
 .navline::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px;
@@ -103,5 +100,5 @@ h1, h2, h3 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee, .marquee-rev, .float, .shimmer, .rp { animation: none; }
-  .wave > span, [data-fill]::before, .flash-lit, .sweep::after, .navline::after { transition: none; }
+  .wave > span, [data-fill]::before, .sweep::after, .navline::after { transition: none; }
 }
