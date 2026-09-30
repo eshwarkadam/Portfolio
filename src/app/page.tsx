@@ -165,7 +165,8 @@ export default function Home() {
         {/* EXPERIENCE */}
         <section id="experience" className="mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-2 md:gap-20">
           <div className="md:sticky md:top-28 md:self-start">
-            <h2 className="text-6xl font-medium md:text-8xl">Experience</h2>
+            <Eyebrow>Career</Eyebrow>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Where I&apos;ve<br /><Em>shipped.</Em></h2>
             <div className="mt-10 space-y-3">
               {jobs.map((j) => (
                 <div key={j.role} className={`rounded-3xl p-6 ${j.current ? "bg-lav" : "border border-lav bg-white"}`}>
@@ -198,7 +199,7 @@ export default function Home() {
           </Reveal>
           {projects.map((p, i) => (
             <StackCard key={p.title} i={i} total={projects.length}>
-              <article className="h-full rounded-[2rem] bg-white p-2 shadow-[0_20px_60px_-20px_rgba(47,52,87,0.3)]">
+              <article className="group h-full rounded-[2rem] bg-white p-2 shadow-[0_20px_60px_-20px_rgba(47,52,87,0.3)]">
                 <div className={`grid h-full overflow-hidden rounded-[1.6rem] md:grid-cols-2 ${p.bg}`}>
                   <div className="flex flex-col p-7 md:p-12">
                     <p className="text-xs tracking-[0.2em] text-mute uppercase">0{i + 1} · {p.kind}</p>
@@ -206,8 +207,21 @@ export default function Home() {
                     <p className="mt-4 leading-relaxed text-mute">{p.desc}</p>
                     <ul className="mt-6 flex flex-wrap gap-2">{p.tags.map((t) => <Pill key={t}>{t}</Pill>)}</ul>
                   </div>
-                  <div className="hidden grid-cols-2 place-content-center place-items-center gap-10 border-l border-ink/10 p-12 text-7xl text-ink/60 md:grid">
-                    {p.icons.map((Icon, j) => <Icon key={j} className={j % 2 ? "opacity-50" : ""} />)}
+                  <div className="relative hidden flex-col justify-center gap-6 border-l border-ink/10 p-10 md:flex">
+                    <div className="overflow-hidden rounded-2xl bg-ink-deep shadow-[0_30px_60px_-25px_rgba(47,52,87,0.6)] transition duration-500 group-hover:-rotate-1">
+                      <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+                        <span className="size-2.5 rounded-full bg-[#ff6b6b]" /><span className="size-2.5 rounded-full bg-sun" /><span className="size-2.5 rounded-full bg-green-400" />
+                        <span className="ml-3 font-mono text-xs text-white/50">{p.file}</span>
+                      </div>
+                      <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-6 text-white/85">
+                        {p.code.map((l, j) => (
+                          <div key={j}><span className="mr-4 inline-block w-4 text-right text-white/25 select-none">{j + 1}</span>{l}</div>
+                        ))}
+                      </pre>
+                    </div>
+                    <div className="flex justify-center gap-6 text-3xl text-ink/50">
+                      {p.icons.map((Icon, j) => <Icon key={j} />)}
+                    </div>
                   </div>
                 </div>
               </article>
@@ -217,17 +231,24 @@ export default function Home() {
 
         {/* EDUCATION */}
         <section className="mx-auto max-w-6xl px-5 py-24">
-          <h2 className="text-5xl font-medium md:text-7xl">Education</h2>
-          <p className="mt-3 text-mute">Where the foundations came from.</p>
-          <ul className="mt-10 border-t border-lav">
-            {education.map((e) => (
-              <li key={e.title} className="grid gap-2 border-b border-lav px-2 py-7 transition hover:bg-white md:grid-cols-[1.2fr_2fr_auto] md:items-center md:gap-8">
-                <span className="text-xl">{e.title}</span>
-                <span className="text-mute">{e.where}</span>
-                <span className="flex gap-4 text-sm text-mute"><b className="font-medium text-ink">{e.score}</b>{e.meta}</span>
-              </li>
+          <Reveal>
+            <Eyebrow>Education</Eyebrow>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Where the<br /><Em>foundations came from.</Em></h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {education.map((e, i) => (
+              <Reveal key={e.title} delay={i * 0.1}>
+                <article data-glow className={`flex h-full flex-col rounded-[1.75rem] p-7 md:p-9 ${i ? "bg-sage" : "bg-lav"}`}>
+                  <div className="flex items-center justify-between text-sm text-mute">
+                    <span>{e.meta}</span>
+                    <span className="rounded-full bg-white/80 px-3 py-1 font-medium text-ink">{e.score}</span>
+                  </div>
+                  <h3 className="mt-10 text-3xl font-medium">{e.title}</h3>
+                  <p className="mt-2 text-mute">{e.where}</p>
+                </article>
+              </Reveal>
             ))}
-          </ul>
+          </div>
         </section>
 
         {/* CONTACT */}
@@ -240,8 +261,8 @@ export default function Home() {
                 <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
               </div>
               <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
-              <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have an app that<br /><Em>needs building?</Em></h2>
-              <p className="mx-auto mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to Android, Kotlin and full-stack roles. Tell me what you&apos;re working on.</p>
+              <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have a project that<br /><Em>needs engineering?</Em></h2>
+              <p className="mx-auto mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to software engineering roles and freelance projects across mobile, web and cloud. Tell me what you&apos;re building.</p>
             </Reveal>
             <Magnetic className="relative mx-auto mt-7 w-fit max-w-full">
               <a data-ripple href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 text-sm font-medium text-ink-deep sm:text-base">

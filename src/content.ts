@@ -16,8 +16,8 @@ export const me = {
 
 export const services = [
   {
-    n: "01", title: "Android apps", bg: "bg-lav", icon: SiAndroid,
-    text: "Native Kotlin & Jetpack Compose apps that feel fast on every phone: offline-first, clean MVVM, Play Store ready.",
+    n: "01", title: "Mobile apps", bg: "bg-lav", icon: SiAndroid,
+    text: "Native Kotlin & Jetpack Compose apps: fast, offline-first, clean architecture and store-ready.",
     points: ["Kotlin & Compose", "Offline-first", "Play Store release"],
   },
   {
@@ -71,10 +71,10 @@ export const jobs = [
 ];
 
 export const highlights = [
-  { title: "End-to-end products", text: "Build Android apps, web dashboards and Kotlin/Ktor backends end to end, from first screen to production." },
+  { title: "End-to-end products", text: "Build mobile apps, web dashboards and cloud backends end to end, from first commit to production." },
   { title: "Scalable backends", text: "Design REST APIs with Ktor and PostgreSQL, with caching, auth and Dockerised deploys." },
   { title: "Real-time & multilingual", text: "Ship real-time data sync, push notifications and multi-language support." },
-  { title: "Solid foundations", text: "Started as an intern shipping core Kotlin/XML screens with MVVM, Firebase Auth, Firestore and Retrofit." },
+  { title: "Cloud-ready delivery", text: "Deploy and run services on Google Cloud and Firebase, with CI/CD that ships on every push." },
 ];
 
 export const projects = [
@@ -84,6 +84,8 @@ export const projects = [
     desc: "Offline-first Android assistant running Gemini Nano on the device: summarises notes, drafts replies and answers questions with no network and no data leaving the phone. Falls back to cloud Gemini for longer tasks.",
     tags: ["Kotlin", "Jetpack Compose", "Gemini Nano", "ML Kit GenAI", "Room DB", "Coroutines"],
     icons: [SiAndroid, SiGooglegemini, SiKotlin, SiTensorflow],
+    file: "Assistant.kt",
+    code: ["val model = GenerativeModel(\"gemini-nano\")", "", "suspend fun summarise(note: String) =", "  model.generateContent(\"Summarise: $note\")", "    .text ?: fallbackToCloud(note)"],
     bg: "bg-lav",
   },
   {
@@ -92,6 +94,8 @@ export const projects = [
     desc: "Ktor service that lets you chat with your own PDFs and docs. Chunks and embeds files into PostgreSQL + pgvector, retrieves the right passages and streams grounded, cited answers over SSE.",
     tags: ["Kotlin", "Ktor", "PostgreSQL", "pgvector", "Embeddings", "Docker"],
     icons: [SiKtor, SiPostgresql, SiHuggingface, SiDocker],
+    file: "ChatRoute.kt",
+    code: ["post(\"/chat\") {", "  val q = call.receive<Question>()", "  val docs = vectors.search(embed(q.text), k = 5)", "  call.respondSse(llm.stream(q, context = docs))", "}"],
     bg: "bg-butter",
   },
   {
@@ -100,6 +104,8 @@ export const projects = [
     desc: "LLM agent that plans and runs multi-step tasks through tool calling, with a Kotlin MCP server exposing app tools and a React dashboard to watch, approve and replay every step.",
     tags: ["Kotlin", "MCP", "Tool calling", "LLM APIs", "React", "Firebase"],
     icons: [SiModelcontextprotocol, SiAnthropic, SiReact, SiKotlin],
+    file: "Agent.kt",
+    code: ["val tools = mcpServer.listTools()", "", "while (!task.done) {", "  val step = llm.plan(task, tools)", "  task.log(approve(step).run())", "}"],
     bg: "bg-sage",
   },
 ];
