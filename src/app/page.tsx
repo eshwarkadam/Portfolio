@@ -177,7 +177,7 @@ export default function Home() {
                     <h3 className="text-2xl font-medium">{j.role}</h3>
                     {j.current && <span className="rounded-full bg-sun px-3 py-1 text-xs font-medium text-ink-deep">Current</span>}
                   </div>
-                  <p className="mt-2 w-fit border-b border-ink/30 pb-1">{j.where}</p>
+                  <a href="https://anireysoft.com" target="_blank" rel="noreferrer" className="mt-2 block w-fit border-b border-ink/30 pb-1 transition hover:border-sun hover:text-ink-deep">{j.where} ↗</a>
                   <p className="mt-3 text-sm text-mute">{j.when}</p>
                 </div>
               ))}
