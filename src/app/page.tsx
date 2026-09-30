@@ -105,8 +105,8 @@ export default function Home() {
             <p className="mx-auto mt-6 max-w-xl text-mute">Good apps come from boring, reliable engineering. Here is what I bring to every build:</p>
           </Reveal>
           <div className="relative mx-auto mt-14 max-w-4xl">
-            <Reveal className="mx-auto w-[320px] md:w-[440px]">
-              <Image src="/cutout.webp" alt="" width={883} height={872} sizes="440px" className="h-auto w-full [mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+            <Reveal className="mx-auto w-[340px] md:w-[500px]">
+              <Image src="/cutout.webp" alt="" width={882} height={629} sizes="500px" className="h-auto w-full [mask-image:linear-gradient(to_bottom,black_75%,transparent)]" />
             </Reveal>
             <ul className="mt-8 flex flex-wrap justify-center gap-3 md:mt-0">
               {chips.map((c, i) => (
