@@ -39,20 +39,21 @@ export default function Home() {
       <main id="top">
         {/* HERO */}
         <section className="p-3">
-          <div className="relative flex h-[calc(100svh-24px)] min-h-[560px] flex-col items-center justify-end overflow-hidden rounded-[2rem] pb-10 text-center text-white">
-            <Image src="/about.jpg" alt="" fill priority sizes="100vw" className="object-cover object-[50%_30%]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ink/30 to-ink/90" />
-            <div className="relative px-5">
+          <div className="relative flex h-[calc(100svh-24px)] min-h-[560px] flex-col items-center justify-end overflow-hidden rounded-[2rem] pb-8 text-center text-white md:items-start md:px-14 md:pb-14 md:text-left">
+            <Image src="/hero.jpg" alt="Eshwar Kadam" fill priority sizes="100vw" className="object-cover object-[50%_15%]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-ink/90 md:hidden" />
+            <div className="absolute inset-0 hidden bg-gradient-to-r from-ink/85 via-ink/30 via-30% to-transparent to-50% md:block" />
+            <div className="relative px-5 md:max-w-md md:px-0">
               <Reveal now delay={0.5}>
-                <a href="#work" className="group mx-auto inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
+                <a href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
                   View my work
                   <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
                 </a>
-                <p className="mx-auto mt-5 max-w-md text-white/85">
+                <p className="mt-5 hidden max-w-sm text-white/85 sm:block">
                   Software Engineer. I build native Android apps in Kotlin, and the Ktor servers and React dashboards behind them.
                 </p>
               </Reveal>
-              <h1 className="mt-4 text-[17vw] leading-[0.9] font-semibold md:text-[9rem]">
+              <h1 className="mt-4 text-[15vw] leading-[0.9] font-semibold md:text-[7rem]">
                 <MaskLine delay={0.1}>{me.first}</MaskLine>
                 <MaskLine delay={0.2}>{me.last}<span className="text-sun">.</span></MaskLine>
               </h1>
