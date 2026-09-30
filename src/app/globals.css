@@ -86,6 +86,13 @@ h1, h2, h3 {
 [data-flash]:hover .flash-lit { clip-path: circle(150px at var(--x, 50%) var(--y, 50%)); }
 @media (hover: none) { .flash-lit { clip-path: none; } }
 
+.navline { position: relative; }
+.navline::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px;
+  background: var(--color-sun); transform: scaleX(0); transform-origin: right; transition: transform 0.35s ease;
+}
+.group:hover .navline::after { transform: scaleX(1); transform-origin: left; }
+
 .sweep { position: relative; }
 .sweep::after {
   content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.2rem; height: 2px; border-radius: 2px;
@@ -96,5 +103,5 @@ h1, h2, h3 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee, .marquee-rev, .float, .shimmer, .rp { animation: none; }
-  .wave > span, [data-fill]::before, .flash-lit, .sweep::after { transition: none; }
+  .wave > span, [data-fill]::before, .flash-lit, .sweep::after, .navline::after { transition: none; }
 }
