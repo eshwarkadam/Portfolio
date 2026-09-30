@@ -81,7 +81,7 @@ export default function Home() {
               Most of my work is a CBSE maths learning platform: a Kotlin & Compose app, a Ktor question engine on PostgreSQL, and a React portal for students and admins, all backed by Firebase.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-3">
-              {[["Platforms", "3", "Android, web & API", "bg-lav"], ["Algorithms", "78+", "question generators", "bg-butter"], ["Languages", "2", "English & Marathi", "bg-sage"]].map(([k, v, s, bg]) => (
+              {[["Experience", "2+", "years building apps", "bg-lav"], ["Apps built", "10+", "mobile apps shipped", "bg-butter"], ["Projects", "15+", "completed end to end", "bg-sage"]].map(([k, v, s, bg]) => (
                 <div key={k} className={`rounded-3xl p-4 md:p-5 ${bg}`}>
                   <p className="text-xs">{k}</p>
                   <p className="my-1 font-display text-4xl">{v}</p>
