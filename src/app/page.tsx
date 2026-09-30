@@ -32,13 +32,12 @@ export default function Home() {
       {/* NAV */}
       <Effects />
       <Logo name={`${me.first} ${me.last}`} />
-      <header className="fixed top-4 right-4 z-50 md:top-5 flex items-center gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
+      <header className="fixed top-4 right-4 z-50 hidden items-center md:top-5 md:flex gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
         <nav className="hidden items-center md:flex">
           {["About", "Services", "Skills", "Experience", "Work", "Contact"].map((l) => (
             <a key={l} href={`#${l.toLowerCase()}`} className="sweep rounded-full px-3 py-1.5 transition hover:text-ink-deep">{l}</a>
           ))}
         </nav>
-        <a data-fill data-ripple href={`mailto:${me.email}`} className="rounded-full bg-ink px-3 py-1 text-xs font-medium text-white md:px-4 md:py-1.5 md:text-sm transition hover:bg-ink-deep">Say hello</a>
       </header>
 
       <main id="top">
