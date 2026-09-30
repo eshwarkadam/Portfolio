@@ -85,12 +85,12 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.1} className="md:pt-12">
-            <p className="text-2xl leading-snug">As a software engineer, I build the whole path from a user&apos;s tap to the server and back.</p>
+            <p className="text-2xl leading-snug">I build complete software products, from the interface people use to the cloud it runs on.</p>
             <p className="mt-5 leading-relaxed text-mute">
-              Most of my work is end-to-end products: Kotlin & Compose apps, Ktor APIs on PostgreSQL and React dashboards, all backed by Firebase, and now with AI built in.
+              I work across the full stack: mobile and web front ends, Kotlin/Ktor APIs on PostgreSQL, deployments on Google Cloud and Firebase, and AI features built in where they help.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-3">
-              {[["Experience", "2+", "years building apps", "bg-lav"], ["Apps built", "10+", "mobile apps shipped", "bg-butter"], ["Projects", "15+", "completed end to end", "bg-sage"]].map(([k, v, s, bg]) => (
+              {[["Experience", "2+", "years in software", "bg-lav"], ["Projects", "15+", "delivered end to end", "bg-butter"], ["Platforms", "3", "mobile, web & cloud", "bg-sage"]].map(([k, v, s, bg]) => (
                 <div key={k} className={`rounded-3xl p-4 md:p-5 ${bg}`}>
                   <p className="text-xs">{k}</p>
                   <p className="my-1 font-display text-4xl">{v}</p>
