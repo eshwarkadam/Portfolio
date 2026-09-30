@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
-import { Magnetic, MaskLine, Reveal, StackCard } from "@/fx";
+import { Logo, Magnetic, MaskLine, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">{children}</p>
@@ -30,10 +30,7 @@ export default function Home() {
   return (
     <>
       {/* NAV */}
-      <a href="#top" className="fixed top-5 left-5 z-50 rounded-2xl bg-white/90 px-4 py-2 leading-tight shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:left-8">
-        <span className="block font-display text-base font-extrabold text-ink-deep">{me.first} {me.last}</span>
-        <span className="block text-[10px] font-medium tracking-[0.18em] text-mute uppercase">Software Engineer</span>
-      </a>
+      <Logo name={`${me.first} ${me.last}`} />
       <header className="fixed top-5 right-5 z-50 flex items-center gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
         <nav className="hidden items-center md:flex">
           {["About", "Services", "Skills", "Experience", "Work", "Contact"].map((l) => (

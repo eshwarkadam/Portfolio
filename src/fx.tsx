@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
-import { useRef, type ReactNode } from "react";
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -62,5 +62,39 @@ export function StackCard({ children, i, total }: { children: ReactNode; i: numb
         {children}
       </motion.div>
     </div>
+  );
+}
+
+const roles = ["Software Engineer", "Full-Stack Developer", "Cloud & AI"];
+
+/** Top-left brand: slides in, shimmers, lifts on hover, cycles the role line. */
+export function Logo({ name }: { name: string }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((n) => (n + 1) % roles.length), 2600);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <motion.a
+      href="#top"
+      initial={{ opacity: 0, x: -24 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, ease, delay: 0.2 }}
+      whileHover={{ y: -2, scale: 1.03 }}
+      className="group fixed top-5 left-5 z-50 overflow-hidden rounded-2xl bg-white/90 px-4 py-2 leading-tight shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md transition-shadow hover:shadow-[0_14px_36px_-10px_rgba(47,52,87,0.45)] md:left-8"
+    >
+      <span className="shimmer pointer-events-none absolute inset-0" aria-hidden />
+      <span className="relative block font-display text-base font-extrabold text-ink-deep">
+        {name}
+        <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 rounded bg-sun transition-all duration-500 group-hover:w-full" />
+      </span>
+      <span className="relative block h-3.5 overflow-hidden text-[10px] font-medium tracking-[0.18em] text-mute uppercase">
+        <AnimatePresence mode="wait">
+          <motion.span key={roles[i]} className="block" initial={{ y: "100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: "-100%", opacity: 0 }} transition={{ duration: 0.35, ease }}>
+            {roles[i]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+    </motion.a>
   );
 }

@@ -38,10 +38,17 @@ h1, h2, h3 {
 .marquee-rev { animation: marquee 35s linear infinite reverse; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
+.shimmer {
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 219, 30, 0.35) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: shimmer 4s ease-in-out 1.2s infinite;
+}
+@keyframes shimmer { 30%, 100% { transform: translateX(120%); } }
+
 .float { animation: float 5s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee, .marquee-rev, .float { animation: none; }
+  .marquee, .marquee-rev, .float, .shimmer { animation: none; }
 }
