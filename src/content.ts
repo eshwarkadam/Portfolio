@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import {
-  SiAndroid, SiAndroidstudio, SiAnthropic, SiHuggingface, SiModelcontextprotocol, SiTensorflow, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiIntellijidea, SiNodedotjs, SiOpenjdk,
+  SiAndroid, SiAndroidstudio, SiGooglecloud, SiGooglecloudstorage, SiGooglepubsub, SiAnthropic, SiHuggingface, SiModelcontextprotocol, SiTensorflow, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiIntellijidea, SiNodedotjs, SiOpenjdk,
   SiJetpackcompose, SiKotlin, SiKtor, SiMui, SiPostgresql, SiPostman, SiReact, SiVite,
 } from "react-icons/si";
 
@@ -14,22 +14,31 @@ export const me = {
   location: "Pune, India",
 };
 
-export const ribbon = [
-  "Kotlin", "Jetpack Compose", "Ktor", "PostgreSQL", "Firebase", "React", "Coroutines", "MVVM", "Docker",
-];
-export const ribbon2 = [
-  "Android", "Clean architecture", "REST APIs", "Real-time sync", "AI features", "Offline-first", "Localization",
-];
-
-export const chips = [
-  { text: "Ship native apps in", bold: "Kotlin & Compose", bg: "bg-lav" },
-  { text: "Add smart features with", bold: "Gemini & LLMs", bg: "bg-sage" },
-  { text: "Keep data in", bold: "real-time sync", bg: "bg-butter" },
-  { text: "Reach users in", bold: "any language", bg: "bg-peach" },
+export const services = [
+  {
+    n: "01", title: "Android apps", bg: "bg-lav", icon: SiAndroid,
+    text: "Native Kotlin & Jetpack Compose apps that feel fast on every phone: offline-first, clean MVVM, Play Store ready.",
+    points: ["Kotlin & Compose", "Offline-first", "Play Store release"],
+  },
+  {
+    n: "02", title: "Backend & APIs", bg: "bg-butter", icon: SiKtor,
+    text: "Ktor REST APIs on PostgreSQL with auth, caching and clean docs, built to be easy for mobile and web to consume.",
+    points: ["Ktor & Coroutines", "PostgreSQL", "Auth & caching"],
+  },
+  {
+    n: "03", title: "Google Cloud", bg: "bg-sage", icon: SiGooglecloud,
+    text: "Deploy and run services on GCP: containers on Cloud Run, managed databases, storage, and CI/CD that ships on every push.",
+    points: ["Cloud Run", "Cloud SQL & Storage", "CI/CD"],
+  },
+  {
+    n: "04", title: "AI features", bg: "bg-peach", icon: SiGooglegemini,
+    text: "Add Gemini-powered features to apps: smart assistants, summaries and chat grounded in your own data.",
+    points: ["Gemini API", "RAG", "On-device AI"],
+  },
 ];
 
 type Tool = { name: string; icon?: IconType };
-export const toolkit: { title: string; note: string; bg: string; icon: IconType; tools: Tool[]; wide?: boolean }[] = [
+export const toolkit: { title: string; note: string; bg: string; icon: IconType; tools: Tool[]; }[] = [
   {
     title: "Android", note: "Native apps that feel fast on cheap phones.", bg: "bg-lav", icon: SiAndroid,
     tools: [{ name: "Kotlin", icon: SiKotlin }, { name: "Java", icon: SiOpenjdk }, { name: "Jetpack Compose", icon: SiJetpackcompose }, { name: "XML layouts" }, { name: "MVVM" }, { name: "ViewModel & LiveData" }, { name: "Navigation" }, { name: "Room DB" }, { name: "Retrofit" }, { name: "ExoPlayer" }],
@@ -43,11 +52,15 @@ export const toolkit: { title: string; note: string; bg: string; icon: IconType;
     tools: [{ name: "React", icon: SiReact }, { name: "Material-UI", icon: SiMui }, { name: "Recharts" }, { name: "Vite", icon: SiVite }, { name: "Axios", icon: SiAxios }],
   },
   {
-    title: "Cloud & AI", note: "Auth, push, LLMs, RAG and on-device AI.", bg: "bg-peach", icon: SiFirebase, wide: true,
+    title: "Cloud & AI", note: "Auth, push, LLMs, RAG and on-device AI.", bg: "bg-peach", icon: SiFirebase,
     tools: [{ name: "Firebase Auth", icon: SiFirebase }, { name: "Firestore" }, { name: "Cloud Messaging" }, { name: "Firebase Admin" }, { name: "Google Generative AI", icon: SiGooglegemini }, { name: "Gemini Nano" }, { name: "RAG & embeddings" }, { name: "LLM tool calling" }, { name: "MCP", icon: SiModelcontextprotocol }],
   },
   {
-    title: "Everyday tools", note: "Where the work actually happens.", bg: "bg-peri", icon: SiAndroidstudio, wide: true,
+    title: "Google Cloud", note: "Deploy, scale and run services on GCP.", bg: "bg-lav", icon: SiGooglecloud,
+    tools: [{ name: "Cloud Run", icon: SiGooglecloud }, { name: "Cloud Functions" }, { name: "Cloud SQL" }, { name: "Cloud Storage", icon: SiGooglecloudstorage }, { name: "Pub/Sub", icon: SiGooglepubsub }, { name: "Artifact Registry" }, { name: "Cloud Build" }, { name: "IAM" }],
+  },
+  {
+    title: "Everyday tools", note: "Where the work actually happens.", bg: "bg-peri", icon: SiAndroidstudio,
     tools: [{ name: "Android Studio", icon: SiAndroidstudio }, { name: "IntelliJ IDEA", icon: SiIntellijidea }, { name: "Git", icon: SiGit }, { name: "GitHub", icon: SiGithub }, { name: "Postman", icon: SiPostman }, { name: "Figma", icon: SiFigma }],
   },
 ];

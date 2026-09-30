@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { chips, education, highlights, jobs, me, projects, ribbon, ribbon2, toolkit } from "@/content";
+import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
 import { Magnetic, MaskLine, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
@@ -10,14 +10,18 @@ const Pill = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-center gap-1.5 rounded-full bg-white/80 px-3 py-1.5 text-sm">{children}</li>
 );
 
-function Ribbon({ items, className, rev }: { items: string[]; className: string; rev?: boolean }) {
+const logos = [...new Map(toolkit.flatMap((t) => t.tools).filter((t) => t.icon).map((t) => [t.name, t])).values()];
+
+function LogoRow({ items, rev }: { items: typeof logos; rev?: boolean }) {
   return (
-    <div className={`w-[110%] -translate-x-[5%] overflow-hidden py-4 shadow-lg ${className}`}>
-      <div className={`${rev ? "marquee-rev" : "marquee"} flex w-max gap-8 font-display text-lg font-bold tracking-widest whitespace-nowrap uppercase`}>
-        {[...items, ...items, ...items, ...items].map((s, i) => (
-          <span key={i} className="flex items-center gap-8">{s}<span aria-hidden>✳</span></span>
+    <div className="group flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <ul className={`${rev ? "marquee-rev" : "marquee"} flex w-max gap-3 py-2 group-hover:[animation-play-state:paused]`}>
+        {[...items, ...items].map((t, i) => (
+          <li key={i} className="flex items-center gap-2.5 rounded-full border border-lav bg-white px-5 py-3 whitespace-nowrap text-mute shadow-sm transition hover:-translate-y-0.5 hover:text-ink">
+            {t.icon && <t.icon className="text-xl" />}<span className="text-sm font-medium">{t.name}</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -26,23 +30,27 @@ export default function Home() {
   return (
     <>
       {/* NAV */}
-      <header className="fixed inset-x-3 top-4 z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full bg-white/85 py-2 pr-2 pl-6 shadow-[0_10px_40px_-12px_rgba(47,52,87,0.25)] backdrop-blur-md">
-        <a href="#top" className="font-display text-xl font-semibold">{me.first}<span className="text-sun">.</span></a>
-        <nav className="hidden gap-1 rounded-full bg-lav/60 p-1 text-sm md:flex">
-          {["About", "Skills", "Experience", "Work", "Contact"].map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="rounded-full px-4 py-2 transition hover:bg-white">{l}</a>
+      <a href="#top" className="fixed top-5 left-5 z-50 rounded-full bg-white/85 px-4 py-2 font-display text-lg font-semibold shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:left-8">
+        {me.first}<span className="text-sun">.</span>
+      </a>
+      <header className="fixed top-5 right-5 z-50 flex items-center gap-1 rounded-full bg-white/85 p-1 text-sm shadow-[0_10px_30px_-12px_rgba(47,52,87,0.3)] backdrop-blur-md md:right-8">
+        <nav className="hidden items-center md:flex">
+          {["About", "Services", "Skills", "Experience", "Work", "Contact"].map((l) => (
+            <a key={l} href={`#${l.toLowerCase()}`} className="rounded-full px-3 py-1.5 transition hover:bg-lav">{l}</a>
           ))}
         </nav>
-        <a href={`mailto:${me.email}`} className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition hover:bg-ink-deep">Say hello</a>
+        <a href={`mailto:${me.email}`} className="rounded-full bg-ink px-4 py-1.5 font-medium text-white transition hover:bg-ink-deep">Say hello</a>
       </header>
 
       <main id="top">
         {/* HERO */}
         <section className="p-3">
-          <div className="relative flex h-[calc(100svh-24px)] min-h-[560px] flex-col items-center justify-end overflow-hidden rounded-[2rem] pb-8 text-center text-white md:items-start md:px-14 md:pb-14 md:text-left">
-            <Image src="/hero.jpg" alt="Eshwar Kadam" fill priority sizes="100vw" className="object-cover object-[50%_15%]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-ink/90 md:hidden" />
-            <div className="absolute inset-0 hidden bg-gradient-to-r from-ink/85 via-ink/30 via-30% to-transparent to-50% md:block" />
+          <div className="relative flex h-[calc(100svh-24px)] min-h-[560px] flex-col items-center justify-end overflow-hidden rounded-[2rem] bg-ink pb-8 text-center text-white md:items-start md:px-14 md:pb-14 md:text-left">
+            <Image src="/hero.jpg" alt="" fill sizes="100vw" className="hidden scale-110 object-cover blur-2xl md:block" />
+            <div className="absolute inset-x-0 top-0 bottom-[34%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] md:inset-y-0 md:right-0 md:left-auto md:aspect-[1448/900] md:max-w-full md:[mask-image:linear-gradient(to_right,transparent,black_22%)]">
+              <Image src="/hero.jpg" alt="Eshwar Kadam" fill priority sizes="100vw" className="object-cover object-[45%_100%]" />
+            </div>
+                        <div className="absolute inset-0 hidden bg-gradient-to-r from-ink/85 via-ink/30 via-30% to-transparent to-50% md:block" />
             <div className="relative px-5 md:max-w-md md:px-0">
               <Reveal now delay={0.5}>
                 <a href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
@@ -93,33 +101,38 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* RIBBONS */}
-        <div className="relative h-56 overflow-hidden" aria-hidden>
-          <div className="absolute inset-x-0 top-16 rotate-2"><Ribbon items={ribbon2} className="bg-sun text-ink-deep" /></div>
-          <div className="absolute inset-x-0 top-16 -rotate-2"><Ribbon items={ribbon} className="bg-ink text-white" rev /></div>
-        </div>
+        {/* STACK MARQUEE */}
+        <section aria-label="Tech stack" className="py-10">
+          <p className="mb-6 text-center text-xs font-medium tracking-[0.2em] text-mute uppercase">Tools I ship with</p>
+          <div className="space-y-3">
+            <LogoRow items={logos.slice(0, Math.ceil(logos.length / 2))} />
+            <LogoRow items={logos.slice(Math.ceil(logos.length / 2))} rev />
+          </div>
+        </section>
 
-        {/* FOCUS */}
-        <section className="mx-auto max-w-6xl px-5 py-24 text-center">
-          <Reveal>
+        {/* SERVICES */}
+        <section id="services" className="mx-auto max-w-6xl px-5 py-24">
+          <Reveal className="text-center">
+            <Eyebrow>What I do</Eyebrow>
             <h2 className="text-5xl leading-[1.05] font-medium md:text-7xl">Less boilerplate.<br />More <Em>shipping.</Em></h2>
-            <p className="mx-auto mt-6 max-w-xl text-mute">Good apps come from boring, reliable engineering. Here is what I bring to every build:</p>
+            <p className="mx-auto mt-6 max-w-xl text-mute">From the first screen to the cloud it runs on, I take products all the way to production.</p>
           </Reveal>
-          <div className="relative mx-auto mt-14 max-w-4xl">
-            <Reveal className="mx-auto w-[340px] md:w-[500px]">
-              <Image src="/cutout.webp" alt="" width={882} height={629} sizes="500px" className="h-auto w-full [mask-image:linear-gradient(to_bottom,black_75%,transparent)]" />
-            </Reveal>
-            <ul className="mt-8 flex flex-wrap justify-center gap-3 md:mt-0">
-              {chips.map((c, i) => (
-                <li
-                  key={c.bold}
-                  className={`float rounded-full px-5 py-3 text-sm shadow-lg md:absolute ${c.bg} ${["md:top-[18%] md:left-0", "md:top-[12%] md:right-0", "md:top-[55%] md:left-[4%]", "md:top-[60%] md:right-[2%]"][i]}`}
-                  style={{ animationDelay: `${i * 0.7}s` }}
-                >
-                  {c.text} <b className="font-semibold">{c.bold}</b>
-                </li>
-              ))}
-            </ul>
+          <div className="mt-14 grid gap-4 md:grid-cols-2">
+            {services.map((s, i) => (
+              <Reveal key={s.title} delay={(i % 2) * 0.1} className="group h-full">
+                <article className="flex h-full flex-col rounded-[1.75rem] border border-lav bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(47,52,87,0.3)] md:p-9">
+                  <div className="flex items-center justify-between">
+                    <span className={`grid size-14 place-items-center rounded-2xl text-2xl ${s.bg}`}><s.icon /></span>
+                    <span className="font-display text-5xl text-lav transition group-hover:text-sun">{s.n}</span>
+                  </div>
+                  <h3 className="mt-8 text-3xl font-medium">{s.title}</h3>
+                  <p className="mt-3 leading-relaxed text-mute">{s.text}</p>
+                  <ul className="mt-auto flex flex-wrap gap-2 pt-6">
+                    {s.points.map((p) => <li key={p} className={`rounded-full px-3 py-1.5 text-sm ${s.bg}`}>{p}</li>)}
+                  </ul>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </section>
 
@@ -131,7 +144,7 @@ export default function Home() {
           </Reveal>
           <div className="mt-12 grid gap-4 md:grid-cols-6">
             {toolkit.map((t, i) => (
-              <Reveal key={t.title} delay={(i % 3) * 0.08} className={`flex min-h-72 flex-col rounded-[1.75rem] p-7 ${t.bg} ${t.wide ? "md:col-span-3" : "md:col-span-2"}`}>
+              <Reveal key={t.title} delay={(i % 3) * 0.08} className={`flex min-h-72 flex-col rounded-[1.75rem] p-7 ${t.bg} md:col-span-2`}>
                 <span className="grid size-12 place-items-center rounded-2xl bg-white/80 text-2xl"><t.icon /></span>
                 <h3 className="mt-auto pt-10 text-2xl font-medium">{t.title}</h3>
                 <p className="mt-1 text-sm text-mute">{t.note}</p>
