@@ -58,7 +58,7 @@ export default function Home() {
                   <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
                 </a>
                 <p className="mt-5 hidden max-w-sm text-white/85 sm:block">
-                  Software Engineer. I build native Android apps in Kotlin, and the Ktor servers and React dashboards behind them.
+                  Software Engineer building scalable products across mobile, web and cloud, from clean code to production on Google Cloud.
                 </p>
               </Reveal>
               <h1 className="mt-4 text-[15vw] leading-[0.9] font-semibold md:text-[7rem]">
