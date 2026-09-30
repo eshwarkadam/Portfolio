@@ -158,7 +158,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="mt-8 mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">Impact so far</p>
+            <p className="mt-8 mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">Impact at Anireysoft</p>
             <div className="grid grid-cols-3 gap-3">
               {impact.map((s) => (
                 <div key={s.label} className={`rounded-3xl p-4 ${s.bg}`}>
@@ -169,7 +169,7 @@ export default function Home() {
             </div>
           </div>
           <div className="space-y-20 md:pt-40">
-            <Eyebrow>Highlights</Eyebrow>
+            <Eyebrow>Highlights from Anireysoft</Eyebrow>
             {highlights.map((h) => (
               <Reveal key={h.title}>
                 <h3 className="text-4xl font-medium md:text-5xl">{h.title}</h3>
@@ -182,8 +182,8 @@ export default function Home() {
         {/* WORK */}
         <section id="work" className="mx-auto max-w-6xl px-5 py-24">
           <Reveal className="mb-12">
-            <Eyebrow>Selected work</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Things I&apos;ve built<br /><Em>and still ship.</Em></h2>
+            <Eyebrow>AI projects</Eyebrow>
+            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Putting AI<br /><Em>where it&apos;s useful.</Em></h2>
           </Reveal>
           {projects.map((p, i) => (
             <StackCard key={p.title} i={i} total={projects.length}>

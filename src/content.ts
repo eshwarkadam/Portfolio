@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import {
-  SiAndroid, SiAndroidstudio, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiIntellijidea, SiNodedotjs, SiOpenjdk,
+  SiAndroid, SiAndroidstudio, SiAnthropic, SiHuggingface, SiModelcontextprotocol, SiTensorflow, SiAxios, SiDocker, SiFigma, SiFirebase, SiGit, SiGithub, SiGooglegemini, SiIntellijidea, SiNodedotjs, SiOpenjdk,
   SiJetpackcompose, SiKotlin, SiKtor, SiMui, SiPostgresql, SiPostman, SiReact, SiVite,
 } from "react-icons/si";
 
@@ -43,8 +43,8 @@ export const toolkit: { title: string; note: string; bg: string; icon: IconType;
     tools: [{ name: "React", icon: SiReact }, { name: "Material-UI", icon: SiMui }, { name: "Recharts" }, { name: "Vite", icon: SiVite }, { name: "Axios", icon: SiAxios }],
   },
   {
-    title: "Cloud & AI", note: "Auth, storage, push and AI tutoring.", bg: "bg-peach", icon: SiFirebase, wide: true,
-    tools: [{ name: "Firebase Auth", icon: SiFirebase }, { name: "Firestore" }, { name: "Cloud Messaging" }, { name: "Firebase Admin" }, { name: "Google Generative AI", icon: SiGooglegemini }],
+    title: "Cloud & AI", note: "Auth, push, LLMs, RAG and on-device AI.", bg: "bg-peach", icon: SiFirebase, wide: true,
+    tools: [{ name: "Firebase Auth", icon: SiFirebase }, { name: "Firestore" }, { name: "Cloud Messaging" }, { name: "Firebase Admin" }, { name: "Google Generative AI", icon: SiGooglegemini }, { name: "Gemini Nano" }, { name: "RAG & embeddings" }, { name: "LLM tool calling" }, { name: "MCP", icon: SiModelcontextprotocol }],
   },
   {
     title: "Everyday tools", note: "Where the work actually happens.", bg: "bg-peri", icon: SiAndroidstudio, wide: true,
@@ -53,8 +53,8 @@ export const toolkit: { title: string; note: string; bg: string; icon: IconType;
 ];
 
 export const jobs = [
-  { role: "Software Engineer", where: "EdTech product company · Pune", when: "Sep 2024 - Present", current: true },
-  { role: "Android Developer Intern", where: "EdTech product company · Pune", when: "Mar 2024 - Sep 2024" },
+  { role: "Software Engineer", where: "Anireysoft · Pune", when: "Sep 2024 - Present", current: true },
+  { role: "Android Developer Intern", where: "Anireysoft · Pune", when: "Mar 2024 - Sep 2024" },
 ];
 
 export const highlights = [
@@ -72,27 +72,27 @@ export const impact = [
 
 export const projects = [
   {
-    kind: "Android Application",
-    title: "Maths Learning App",
-    desc: "Native Android app for CBSE maths students: interactive practice, AI tutoring with Google Generative AI, auto-scored exams, video lessons, real-time progress sync and full English & Marathi support.",
-    tags: ["Kotlin", "Jetpack Compose", "Firebase", "Google AI", "MVVM", "ExoPlayer"],
-    icons: [SiKotlin, SiJetpackcompose, SiFirebase, SiGooglegemini],
+    kind: "On-device AI · Android",
+    title: "Pocket AI Assistant",
+    desc: "Offline-first Android assistant running Gemini Nano on the device: summarises notes, drafts replies and answers questions with no network and no data leaving the phone. Falls back to cloud Gemini for longer tasks.",
+    tags: ["Kotlin", "Jetpack Compose", "Gemini Nano", "ML Kit GenAI", "Room DB", "Coroutines"],
+    icons: [SiAndroid, SiGooglegemini, SiKotlin, SiTensorflow],
     bg: "bg-lav",
   },
   {
-    kind: "Backend Server",
-    title: "Question Engine API",
-    desc: "Kotlin/Ktor REST API that generates personalised maths questions on demand from 78+ algorithm classes, with 10x buffer caching, a class-chapter-topic curriculum hierarchy, Firebase auth and Dockerised deploys.",
-    tags: ["Kotlin", "Ktor", "PostgreSQL", "Firebase Admin", "Docker", "Coroutines"],
-    icons: [SiKtor, SiPostgresql, SiDocker, SiKotlin],
+    kind: "RAG · Backend",
+    title: "DocChat RAG API",
+    desc: "Ktor service that lets you chat with your own PDFs and docs. Chunks and embeds files into PostgreSQL + pgvector, retrieves the right passages and streams grounded, cited answers over SSE.",
+    tags: ["Kotlin", "Ktor", "PostgreSQL", "pgvector", "Embeddings", "Docker"],
+    icons: [SiKtor, SiPostgresql, SiHuggingface, SiDocker],
     bg: "bg-butter",
   },
   {
-    kind: "Web Frontend",
-    title: "Student & Admin Portal",
-    desc: "React web platform for students and admins: dashboards, a live exam interface, assignment tracking, performance analytics with Recharts and PDF report export.",
-    tags: ["React 19", "Material-UI", "Firebase", "Recharts", "Axios", "Vite"],
-    icons: [SiReact, SiMui, SiVite, SiFirebase],
+    kind: "AI Agents · Full-stack",
+    title: "Agentic Task Automator",
+    desc: "LLM agent that plans and runs multi-step tasks through tool calling, with a Kotlin MCP server exposing app tools and a React dashboard to watch, approve and replay every step.",
+    tags: ["Kotlin", "MCP", "Tool calling", "LLM APIs", "React", "Firebase"],
+    icons: [SiModelcontextprotocol, SiAnthropic, SiReact, SiKotlin],
     bg: "bg-sage",
   },
 ];
