@@ -214,12 +214,16 @@ export default function Home() {
         <section id="contact" className="p-3">
           <div className="rounded-[2rem] bg-ink px-6 py-24 text-center text-white md:py-32">
             <Reveal>
+              <div className="relative mx-auto mb-8 size-28 md:size-32">
+                <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="128px" className="rounded-full object-cover ring-4 ring-sun" />
+                <span className="absolute right-1 bottom-1 size-5 rounded-full border-4 border-ink bg-green-400" title="Available for work" />
+              </div>
               <p className="mb-5 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
               <h2 className="text-5xl leading-[1.05] font-medium md:text-7xl">Have an app that<br /><Em>needs building?</Em></h2>
               <p className="mx-auto mt-6 max-w-md text-white/70">I&apos;m open to Android, Kotlin and full-stack roles. Tell me what you&apos;re working on.</p>
             </Reveal>
             <Magnetic className="mx-auto mt-10 w-fit max-w-full">
-              <a href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-2 pr-2 pl-6 font-medium break-all text-ink-deep md:text-lg">
+              <a href={`mailto:${me.email}`} className="group inline-flex max-w-full items-center gap-3 rounded-full bg-sun py-2 pr-2 pl-5 text-sm font-medium text-ink-deep sm:pl-6 sm:text-base md:text-lg">
                 {me.email}
                 <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:-rotate-45">→</span>
               </a>
