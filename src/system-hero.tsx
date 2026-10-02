@@ -229,7 +229,7 @@ export function SystemHero() {
 
   return (
     <>
-      <div ref={box} className="absolute inset-0 md:left-[38%]">
+      <div ref={box} className="hero-net absolute inset-0 md:left-[45%]">
         <canvas ref={cv} aria-hidden className="absolute inset-0 h-full w-full" />
         {NODES.map((n, i) => (
           <div

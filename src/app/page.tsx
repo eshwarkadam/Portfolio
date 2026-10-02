@@ -41,18 +41,22 @@ export default function Home() {
           <div className="relative flex h-[calc(100svh-24px)] min-h-[620px] flex-col justify-end overflow-hidden rounded-[2rem] bg-[radial-gradient(120%_90%_at_75%_30%,#2d3366_0%,#1c2040_60%,#12152c_100%)] px-6 pb-10 text-white md:justify-center md:px-14 md:pb-0">
             <SystemHero />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#12152c] via-[#12152c]/70 via-40% to-transparent md:bg-gradient-to-r md:from-[#1c2040] md:via-[#1c2040]/60 md:via-35% md:to-transparent md:to-55%" />
-            <div className="relative z-10 md:max-w-lg">
+            <div className="relative z-10 md:max-w-2xl">
+              <div aria-hidden className="pointer-events-none absolute -top-10 -left-16 -z-10 h-[420px] w-[620px] rounded-full bg-sun/10 blur-[110px]" />
               <Reveal now delay={0.3}>
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3.5 py-1.5 text-xs text-white/80 backdrop-blur-sm md:text-sm">
                   <span className="size-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80]" /> All systems operational · Open to work
                 </span>
               </Reveal>
-              <h1 className="mt-5 text-[17vw] leading-[0.9] font-extrabold tracking-tight md:text-[6.5rem]">
+              <h1 className="mt-5 text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
                 <MaskLine delay={0.1}><Wave text={me.first} /></MaskLine>
                 <MaskLine delay={0.2}><Wave text={me.last} /><span className="text-sun">.</span></MaskLine>
               </h1>
+              <Reveal now delay={0.4}>
+                <p className="mt-4 font-display text-xl font-semibold text-sun md:text-3xl">Software Engineer</p>
+              </Reveal>
               <Reveal now delay={0.5}>
-                <p className="mt-5 max-w-md text-base text-white/75 md:text-lg">
+                <p className="mt-3 max-w-md text-base text-white/75 md:text-lg">
                   I build the whole system: the app you tap, the API behind it and the cloud it runs on.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
