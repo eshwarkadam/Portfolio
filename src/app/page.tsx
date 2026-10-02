@@ -68,7 +68,6 @@ export default function Home() {
                     View CV <span aria-hidden>↗</span>
                   </a>
                 </div>
-                <p className="mt-6 hidden text-xs text-white/40 md:block">Tip: hover a node to see its stack, click it to send traffic.</p>
               </Reveal>
             </div>
           </div>
