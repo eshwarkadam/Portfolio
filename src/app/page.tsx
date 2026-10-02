@@ -59,9 +59,6 @@ export default function Home() {
                     View my work
                     <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
                   </a>
-                  <a data-fill data-ripple href="/Eshwar-Kadam-Resume.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/[0.08] px-5 py-2.5 font-medium text-white backdrop-blur-sm transition">
-                    View CV <span aria-hidden>↗</span>
-                  </a>
                 </div>
               </Reveal>
             </div>
