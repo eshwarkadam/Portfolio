@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SystemHero } from "@/system-hero";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
 import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, MaskLine, Reveal, StackCard } from "@/fx";
 
@@ -37,29 +38,34 @@ export default function Home() {
       <main id="top">
         {/* HERO */}
         <section className="p-3">
-          <div className="relative flex h-[calc(100svh-24px)] min-h-[560px] flex-col items-center justify-end overflow-hidden rounded-[2rem] bg-ink pb-8 text-center text-white md:items-start md:px-14 md:pb-14 md:text-left">
-            <Image src="/hero-2.jpg" alt="" fill sizes="100vw" className="hidden scale-110 object-cover blur-2xl md:block" />
-            <div className="absolute inset-x-0 top-0 bottom-[34%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] md:inset-y-0 md:right-0 md:left-auto md:aspect-[1448/900] md:max-w-full md:[mask-image:linear-gradient(to_right,transparent,black_22%)]">
-              <Image src="/hero-2.jpg" alt="Eshwar Kadam" fill priority sizes="100vw" className="object-cover object-[45%_100%]" />
-            </div>
-                        <div className="absolute inset-0 hidden bg-gradient-to-r from-ink/85 via-ink/30 via-30% to-transparent to-50% md:block" />
-            <div className="relative px-5 md:max-w-md md:px-0">
-              <Reveal now delay={0.5}>
-                <a data-ripple href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
-                  View my work
-                  <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
-                </a>
-                <a data-fill data-ripple href="/Eshwar-Kadam-Resume.pdf" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/10 px-5 py-2.5 font-medium text-white backdrop-blur-sm transition">
-                  View CV <span aria-hidden>↗</span>
-                </a>
-                <p className="mt-5 hidden max-w-sm text-white/85 sm:block">
-                  Software Engineer building scalable products across mobile, web and cloud, from clean code to production on Google Cloud.
-                </p>
+          <div className="relative flex h-[calc(100svh-24px)] min-h-[620px] flex-col justify-end overflow-hidden rounded-[2rem] bg-[radial-gradient(120%_90%_at_75%_30%,#2d3366_0%,#1c2040_60%,#12152c_100%)] px-6 pb-10 text-white md:justify-center md:px-14 md:pb-0">
+            <SystemHero />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#12152c] via-[#12152c]/70 via-40% to-transparent md:bg-gradient-to-r md:from-[#1c2040] md:via-[#1c2040]/60 md:via-35% md:to-transparent md:to-55%" />
+            <div className="relative z-10 md:max-w-lg">
+              <Reveal now delay={0.3}>
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3.5 py-1.5 text-xs text-white/80 backdrop-blur-sm md:text-sm">
+                  <span className="size-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80]" /> All systems operational · Open to work
+                </span>
               </Reveal>
-              <h1 className="mt-4 text-[15vw] leading-[0.9] font-semibold md:text-[7rem]">
+              <h1 className="mt-5 text-[17vw] leading-[0.9] font-extrabold tracking-tight md:text-[6.5rem]">
                 <MaskLine delay={0.1}><Wave text={me.first} /></MaskLine>
                 <MaskLine delay={0.2}><Wave text={me.last} /><span className="text-sun">.</span></MaskLine>
               </h1>
+              <Reveal now delay={0.5}>
+                <p className="mt-5 max-w-md text-base text-white/75 md:text-lg">
+                  I build the whole system: the app you tap, the API behind it and the cloud it runs on.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <a data-ripple href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
+                    View my work
+                    <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
+                  </a>
+                  <a data-fill data-ripple href="/Eshwar-Kadam-Resume.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/[0.08] px-5 py-2.5 font-medium text-white backdrop-blur-sm transition">
+                    View CV <span aria-hidden>↗</span>
+                  </a>
+                </div>
+                <p className="mt-6 hidden text-xs text-white/40 md:block">Tip: hover a node to see its stack, click it to send traffic.</p>
+              </Reveal>
             </div>
           </div>
         </section>
