@@ -43,12 +43,7 @@ export default function Home() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#12152c] via-[#12152c]/70 via-40% to-transparent md:bg-gradient-to-r md:from-[#1c2040] md:via-[#1c2040]/60 md:via-35% md:to-transparent md:to-55%" />
             <div className="relative z-10 md:max-w-2xl">
               <div aria-hidden className="pointer-events-none absolute -top-10 -left-16 -z-10 h-[420px] w-[620px] rounded-full bg-sun/10 blur-[110px]" />
-              <Reveal now delay={0.3}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3.5 py-1.5 text-xs text-white/80 backdrop-blur-sm md:text-sm">
-                  <span className="size-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80]" /> All systems operational · Open to work
-                </span>
-              </Reveal>
-              <h1 className="mt-5 text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
+              <h1 className="text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
                 <MaskLine delay={0.1}><Wave text={me.first} /></MaskLine>
                 <MaskLine delay={0.2}><Wave text={me.last} /><span className="text-sun">.</span></MaskLine>
               </h1>
