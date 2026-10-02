@@ -71,7 +71,7 @@ export default function Home() {
             <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Turning complexity<br />into <Em>clean software.</Em></h2>
             <div className="mt-10 flex items-center gap-5">
               <div className="relative size-32 overflow-hidden rounded-3xl bg-lav">
-                <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
+                <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
               </div>
               <div>
                 <p className="text-lg font-medium">{me.first} {me.last}</p>
@@ -274,7 +274,7 @@ export default function Home() {
             <div className="relative mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2">
               <Reveal className="text-center md:text-left">
                 <div className="relative mx-auto mb-5 size-20 md:mx-0 md:size-24">
-                  <Image src="/contact.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
+                  <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
                   <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
                 </div>
                 <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
