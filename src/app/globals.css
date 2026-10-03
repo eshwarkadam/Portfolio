@@ -48,6 +48,12 @@ h1, h2, h3 {
 .float { animation: float 5s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
+/* ---- hero entrance (CSS only: text is visible without waiting for JS) ---- */
+.rise { animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes rise { from { transform: translateY(110%); } }
+.fade-up { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } }
+
 /* ---- system hero ---- */
 .hero-net { opacity: 0.85; animation: netIn 1.2s ease-out 0.9s both; }
 @keyframes netIn { from { opacity: 0; } }
@@ -108,6 +114,6 @@ h1, h2, h3 {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee, .marquee-rev, .float, .shimmer, .rp, .hero-net, .node-pop, .node-orbit, .node-pulse > button, .log-in { animation: none; }
+  .rise, .fade-up, .marquee, .marquee-rev, .float, .shimmer, .rp, .hero-net, .node-pop, .node-orbit, .node-pulse > button, .log-in { animation: none; }
   .wave > span, [data-fill]::before, .sweep::after, .navline::after { transition: none; }
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SystemHero } from "@/system-hero";
 import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
-import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, MaskLine, Reveal, StackCard } from "@/fx";
+import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, Reveal, StackCard } from "@/fx";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">{children}</p>
@@ -44,13 +44,13 @@ export default function Home() {
             <div className="relative z-10 md:max-w-2xl">
               <div aria-hidden className="pointer-events-none absolute -top-10 -left-16 -z-10 h-[420px] w-[620px] rounded-full bg-sun/10 blur-[110px]" />
               <h1 className="text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
-                <MaskLine delay={0.1}><Wave text={me.first} /></MaskLine>
-                <MaskLine delay={0.2}><Wave text={me.last} /><span className="text-sun">.</span></MaskLine>
+                <span className="block overflow-hidden pb-[0.1em]"><span className="rise block" style={{ animationDelay: "0.1s" }}><Wave text={me.first} /></span></span>
+                <span className="block overflow-hidden pb-[0.1em]"><span className="rise block" style={{ animationDelay: "0.2s" }}><Wave text={me.last} /><span className="text-sun">.</span></span></span>
               </h1>
-              <Reveal now delay={0.4}>
+              <div className="fade-up" style={{ animationDelay: "0.4s" }}>
                 <p className="mt-4 font-display text-xl font-semibold text-sun md:text-3xl">Software Engineer</p>
-              </Reveal>
-              <Reveal now delay={0.5}>
+              </div>
+              <div className="fade-up" style={{ animationDelay: "0.5s" }}>
                 <p className="mt-3 max-w-md text-base text-white/75 md:text-lg">
                   I build the whole system: the app you tap, the API behind it and the cloud it runs on.
                 </p>
@@ -60,7 +60,7 @@ export default function Home() {
                     <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
                   </a>
                 </div>
-              </Reveal>
+              </div>
             </div>
           </div>
         </section>
