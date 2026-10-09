@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -20,36 +20,7 @@ export function Reveal({ children, delay = 0, className, now }: { children: Reac
   );
 }
 
-/** Headline line that slides up from behind a mask. */
-export function MaskLine({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
-  return (
-    <span className="block overflow-hidden pb-[0.1em]">
-      <motion.span className="block" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1, ease, delay }}>
-        {children}
-      </motion.span>
-    </span>
-  );
-}
 
-/** Element that leans toward the pointer. */
-export function Magnetic({ children, className }: { children: ReactNode; className?: string }) {
-  const x = useSpring(useMotionValue(0), { stiffness: 200, damping: 15 });
-  const y = useSpring(useMotionValue(0), { stiffness: 200, damping: 15 });
-  return (
-    <motion.div
-      className={className}
-      style={{ x, y }}
-      onPointerMove={(e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        x.set((e.clientX - r.left - r.width / 2) * 0.25);
-        y.set((e.clientY - r.top - r.height / 2) * 0.25);
-      }}
-      onPointerLeave={() => { x.set(0); y.set(0); }}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 /** Sticky card that shrinks as the next one stacks over it. */
 export function StackCard({ children, i, total }: { children: ReactNode; i: number; total: number }) {
@@ -213,14 +184,14 @@ export function ContactForm({ email }: { email: string }) {
       setState("error");
     }
   };
-  const field = "w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white placeholder:text-white/50 outline-none transition focus:border-sun focus:bg-white/15";
+  const field = "w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white placeholder:text-white/60 outline-none transition focus:border-sun focus:bg-white/15";
   if (state === "sent")
     return (
       <div role="status" className="grid h-full place-items-center rounded-3xl border border-white/15 bg-white/5 p-8 text-center">
         <div>
           <p className="text-4xl">✓</p>
           <p className="mt-3 text-xl font-medium">Thanks, message sent!</p>
-          <p className="mt-2 text-sm text-white/60">I&apos;ll reply within 1–2 days.</p>
+          <p className="mt-2 text-sm text-white/75">I&apos;ll reply within 1–2 days.</p>
           <button onClick={() => setState("idle")} className="mt-5 text-sm text-sun underline underline-offset-4">Send another</button>
         </div>
       </div>

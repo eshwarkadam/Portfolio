@@ -279,10 +279,10 @@ export default function Home() {
                   <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
                   <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
                 </div>
-                <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/60 uppercase">Contact</p>
+                <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/75 uppercase">Contact</p>
                 <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have a project that<br /><Em>needs engineering?</Em></h2>
                 <p className="mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to software engineering roles and freelance projects across mobile, web and cloud. Tell me what you&apos;re building.</p>
-                <p className="mt-6 text-sm text-white/60">Or email me directly</p>
+                <p className="mt-6 text-sm text-white/75">Or email me directly</p>
                 <a data-ripple href={`mailto:${me.email}`} className="mt-1 inline-block max-w-full font-medium break-all text-sun underline-offset-4 hover:underline">{me.email}</a>
                 <ul className="mt-6 flex flex-wrap justify-center gap-2 text-sm md:justify-start">
                   {[["View CV", "/Eshwar-Kadam-Resume.pdf"], ["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
