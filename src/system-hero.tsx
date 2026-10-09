@@ -1,21 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import { PiCloud, PiDatabase, PiDesktop, PiDeviceMobile, PiGearSix, PiLockKey, PiSparkle } from "react-icons/pi";
 
 /* Live animated system architecture for the hero.
    Canvas draws grid, stars, links and comet-trail packets; nodes are HTML for crisp text + hover. */
 
-type NodeDef = { id: string; x: number; y: number; icon: string; label: string; stack: string };
+type NodeDef = { id: string; x: number; y: number; icon: IconType; label: string; stack: string };
 
 // positions are fractions of the canvas box (desktop: right ~60% of hero)
 const NODES: NodeDef[] = [
-  { id: "app", x: 0.14, y: 0.24, icon: "📱", label: "Mobile app", stack: "Native, fast, offline-first" },
-  { id: "web", x: 0.14, y: 0.66, icon: "🖥️", label: "Web app", stack: "Responsive dashboards" },
-  { id: "api", x: 0.46, y: 0.45, icon: "⚙️", label: "API", stack: "Secure, scalable REST services" },
-  { id: "db", x: 0.8, y: 0.18, icon: "🗄️", label: "Database", stack: "Reliable data storage" },
-  { id: "cloud", x: 0.84, y: 0.5, icon: "☁️", label: "Cloud", stack: "Deploy, scale and monitor" },
-  { id: "ai", x: 0.62, y: 0.82, icon: "✨", label: "AI", stack: "Smart features built in" },
-  { id: "fb", x: 0.36, y: 0.08, icon: "🔐", label: "Auth", stack: "Sign-in and real-time sync" },
+  { id: "app", x: 0.14, y: 0.24, icon: PiDeviceMobile, label: "Mobile app", stack: "Native, fast, offline-first" },
+  { id: "web", x: 0.14, y: 0.66, icon: PiDesktop, label: "Web app", stack: "Responsive dashboards" },
+  { id: "api", x: 0.46, y: 0.45, icon: PiGearSix, label: "API", stack: "Secure, scalable REST services" },
+  { id: "db", x: 0.8, y: 0.18, icon: PiDatabase, label: "Database", stack: "Reliable data storage" },
+  { id: "cloud", x: 0.84, y: 0.5, icon: PiCloud, label: "Cloud", stack: "Deploy, scale and monitor" },
+  { id: "ai", x: 0.62, y: 0.82, icon: PiSparkle, label: "AI", stack: "Smart features built in" },
+  { id: "fb", x: 0.36, y: 0.08, icon: PiLockKey, label: "Auth", stack: "Sign-in and real-time sync" },
 ];
 const EDGES: [string, string][] = [
   ["app", "api"], ["web", "api"], ["api", "db"], ["api", "cloud"], ["api", "ai"], ["app", "fb"], ["fb", "api"], ["web", "cloud"],
@@ -249,7 +251,7 @@ export function SystemHero() {
               style={{ animationDelay: `${i * 0.18 + 0.5}s` }}
             >
               <span className="node-orbit pointer-events-none absolute -inset-2 rounded-[1.1rem] border border-dashed border-white/10" aria-hidden />
-              <span className="text-sm md:text-lg">{n.icon}</span>
+              <n.icon aria-hidden className="size-4 text-sun md:size-5" />
               {n.label}
             </button>
           </div>
@@ -275,9 +277,9 @@ export function SystemHero() {
           <polyline points={`0,38 ${sparkPath} 120,38`} fill="rgba(255,219,30,0.12)" stroke="none" />
         </svg>
         <div className="mt-2 grid grid-cols-3 gap-2 text-center">
-          <div><p className="text-white">{stats.lat}ms</p><p className="text-[10px] text-white/40">p95</p></div>
-          <div><p className="text-white">99.98%</p><p className="text-[10px] text-white/40">uptime</p></div>
-          <div><p className="text-white">{(stats.served / 1000).toFixed(1)}k</p><p className="text-[10px] text-white/40">served</p></div>
+          <div><p className="text-white">{stats.lat}ms</p><p className="text-[10px] text-white/60">p95</p></div>
+          <div><p className="text-white">99.98%</p><p className="text-[10px] text-white/60">uptime</p></div>
+          <div><p className="text-white">{(stats.served / 1000).toFixed(1)}k</p><p className="text-[10px] text-white/60">served</p></div>
         </div>
         <div className="mt-3 h-[60px] overflow-hidden border-t border-white/10 pt-2 leading-5">
           {LOGS.slice(Math.max(0, log - 3), log).map(([t, c]) => (

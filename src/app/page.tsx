@@ -31,6 +31,7 @@ export default function Home() {
   return (
     <>
       {/* NAV */}
+      <a href="#about" className="sr-only z-[100] rounded-full bg-sun px-5 py-3 font-medium text-ink-deep focus:not-sr-only focus:fixed focus:top-4 focus:left-1/2 focus:-translate-x-1/2">Skip to content</a>
       <Effects />
       <Logo name={`${me.first} ${me.last}`} />
       <Nav />
@@ -43,7 +44,7 @@ export default function Home() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#12152c] via-[#12152c]/70 via-40% to-transparent md:bg-gradient-to-r md:from-[#1c2040] md:via-[#1c2040]/60 md:via-35% md:to-transparent md:to-55%" />
             <div className="relative z-10 md:max-w-2xl">
               <div aria-hidden className="pointer-events-none absolute -top-10 -left-16 -z-10 h-[420px] w-[620px] rounded-full bg-sun/10 blur-[110px]" />
-              <h1 className="text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
+              <h1 aria-label={`${me.first} ${me.last}`} className="text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
                 <span className="block overflow-hidden pb-[0.1em]"><span className="rise block" style={{ animationDelay: "0.1s" }}><Wave text={me.first} /></span></span>
                 <span className="block overflow-hidden pb-[0.1em]"><span className="rise block" style={{ animationDelay: "0.2s" }}><Wave text={me.last} /><span className="text-sun">.</span></span></span>
               </h1>
@@ -202,7 +203,7 @@ export default function Home() {
                     <div className="overflow-hidden rounded-2xl bg-ink-deep shadow-[0_30px_60px_-25px_rgba(47,52,87,0.6)] transition duration-500 group-hover:-rotate-1">
                       <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
                         <span className="size-2.5 rounded-full bg-[#ff6b6b]" /><span className="size-2.5 rounded-full bg-sun" /><span className="size-2.5 rounded-full bg-green-400" />
-                        <span className="ml-3 font-mono text-xs text-white/50">{p.file}</span>
+                        <span className="ml-3 font-mono text-xs text-white/65">{p.file}</span>
                       </div>
                       <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-6 text-white/85">
                         {p.code.map((l, j) => (

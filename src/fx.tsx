@@ -185,8 +185,8 @@ export function Wave({ text }: { text: string }) {
     for (const l of ref.current!.children as HTMLCollectionOf<HTMLElement>) { l.style.transform = ""; l.style.color = ""; }
   };
   return (
-    <span ref={ref} onPointerMove={move} onPointerLeave={leave} aria-label={text} className="wave">
-      {[...text].map((c, i) => <span key={i} aria-hidden>{c}</span>)}
+    <span onPointerMove={move} onPointerLeave={leave} className="wave">
+      <span ref={ref} aria-hidden>{[...text].map((c, i) => <span key={i}>{c}</span>)}</span>
     </span>
   );
 }
@@ -213,7 +213,7 @@ export function ContactForm({ email }: { email: string }) {
       setState("error");
     }
   };
-  const field = "w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white placeholder:text-white/40 outline-none transition focus:border-sun focus:bg-white/15";
+  const field = "w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white placeholder:text-white/50 outline-none transition focus:border-sun focus:bg-white/15";
   if (state === "sent")
     return (
       <div role="status" className="grid h-full place-items-center rounded-3xl border border-white/15 bg-white/5 p-8 text-center">
@@ -230,15 +230,15 @@ export function ContactForm({ email }: { email: string }) {
       <p className="mb-1 text-lg font-medium">Send a message</p>
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
       <label className="block">
-        <span className="sr-only">Your name</span>
-        <input required name="name" maxLength={80} placeholder="Your name" className={field} />
+        <span className="mb-1.5 block text-sm text-white/80">Name <span aria-hidden className="text-sun">*</span></span>
+        <input required name="name" autoComplete="name" maxLength={80} placeholder="Jane Doe" className={field} />
       </label>
       <label className="block">
-        <span className="sr-only">Your email</span>
-        <input required type="email" name="email" maxLength={120} placeholder="Your email" className={field} />
+        <span className="mb-1.5 block text-sm text-white/80">Email <span aria-hidden className="text-sun">*</span></span>
+        <input required type="email" name="email" autoComplete="email" maxLength={120} placeholder="jane@company.com" className={field} />
       </label>
       <label className="block">
-        <span className="sr-only">Message</span>
+        <span className="mb-1.5 block text-sm text-white/80">Message <span aria-hidden className="text-sun">*</span></span>
         <textarea required name="message" rows={4} maxLength={2000} placeholder="Tell me about the role or project" className={`${field} resize-none`} />
       </label>
       <button data-ripple disabled={state === "sending"} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sun px-6 py-3 font-medium text-ink-deep transition hover:brightness-105 disabled:opacity-60">
@@ -355,7 +355,7 @@ export function Nav() {
                   transition={{ duration: 0.4, ease, delay: 0.05 + i * 0.05 }}
                   className={`flex items-baseline gap-4 py-2 font-display text-4xl font-medium ${active === id ? "text-sun" : "text-white"}`}
                 >
-                  <span className="text-xs text-white/40">0{i + 1}</span>{label}
+                  <span className="text-xs text-white/60">0{i + 1}</span>{label}
                 </motion.a>
               ))}
               <motion.a
