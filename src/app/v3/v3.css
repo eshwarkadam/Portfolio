@@ -1,0 +1,31 @@
+/* v3 "Compile": scoped so the main site is untouched */
+.v3 {
+  --plum: #1a0f24;
+  --pearl: #ede6f6;
+  --aqua: #4fe3c1;
+  background: var(--plum);
+  color: var(--pearl);
+  font-family: var(--v3-sans), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+.v3 h1, .v3 h2, .v3 h3, .v3-display { font-family: var(--v3-display), system-ui, sans-serif; letter-spacing: -0.035em; }
+.v3 :focus-visible { outline: 2px solid var(--aqua); outline-offset: 4px; border-radius: 8px; }
+.v3 ::selection { background: var(--aqua); color: var(--plum); }
+@media (pointer: fine) { .v3, .v3 a, .v3 button { cursor: none; } }
+
+.v3-link { background: linear-gradient(var(--aqua), var(--aqua)) 0 100% / 0% 2px no-repeat; transition: background-size 0.4s ease; }
+.v3-link:hover { background-size: 100% 2px; }
+
+/* subtle film grain over everything */
+.v3::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 70; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-loader { display: none; }
+  .v3, .v3 a, .v3 button { cursor: auto; }
+}
