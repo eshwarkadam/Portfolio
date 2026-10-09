@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { education, jobs, me, projects, services, toolkit } from "@/content";
+import { LAYER_COLOR } from "./colors";
+import { Trace } from "./trace";
 import "./v2.css";
 
 const sans = Schibsted_Grotesk({ variable: "--v2-sans", subsets: ["latin"] });
@@ -11,17 +14,8 @@ export const metadata: Metadata = {
   robots: { index: false }, // preview design; the main page stays canonical
 };
 
-// one request traced through the stack I build: start/end in ms on a 0–240ms axis
-const TRACE = [
-  { name: "Tap in the mobile app", layer: "Mobile", start: 0, end: 18, detail: "Kotlin and Jetpack Compose, offline-first" },
-  { name: "Sign-in check", layer: "Auth", start: 18, end: 46, detail: "Firebase Auth with real-time sync" },
-  { name: "POST /sync", layer: "API", start: 46, end: 186, detail: "Ktor REST API with caching and validation" },
-  { name: "Read and write", layer: "Database", start: 70, end: 128, detail: "PostgreSQL, indexed queries" },
-  { name: "Summarise", layer: "AI", start: 128, end: 176, detail: "Gemini API behind a provider-neutral router" },
-  { name: "Served from the cloud", layer: "Cloud", start: 46, end: 200, detail: "Docker containers on Google Cloud Run" },
-  { name: "Response on screen", layer: "Mobile", start: 200, end: 214, detail: "The user sees the result" },
-];
-const TOTAL = 240;
+const SERVICE_LAYER: Record<string, string> = { "Mobile apps": "Mobile", "Backend & APIs": "API", "Google Cloud": "Cloud", "AI features": "AI" 
+};
 
 export default function V2() {
   return (
@@ -42,52 +36,25 @@ export default function V2() {
       <main id="top">
         {/* HERO: name, then one request traced through the stack */}
         <section className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:px-10 md:pt-28">
-          <h1 className="text-[15vw] leading-[0.86] font-extrabold md:text-[9.5rem]">Eshwar Kadam</h1>
-          <p className="mt-8 max-w-xl text-xl leading-snug text-[var(--soft)] md:text-2xl">
-            Software engineer in Pune. I build the whole path a request travels, from the screen you tap to the cloud that answers.
-          </p>
-
-          <figure className="mt-16 md:mt-20" aria-labelledby="trace-cap">
-            <div className="flex items-baseline justify-between border-b border-[var(--rule)] pb-3 text-sm text-[var(--soft)]">
-              <figcaption id="trace-cap">One request through the stack I build</figcaption>
-              <span className="v2-mono">{TOTAL} ms</span>
+          <div className="grid items-end gap-10 md:grid-cols-[1fr_auto]">
+            <div>
+              <h1 className="text-[15vw] leading-[0.86] font-extrabold md:text-[8.5rem]">Eshwar Kadam</h1>
+              <p className="mt-8 max-w-xl text-xl leading-snug text-[var(--soft)] md:text-2xl">
+                Software engineer in Pune. I build the whole path a request travels, from the screen you tap to the cloud that answers.
+              </p>
             </div>
-            <ol>
-              {TRACE.map((s, i) => {
-                const last = i === TRACE.length - 1;
-                return (
-                  <li key={s.name} tabIndex={0} className="v2-row grid grid-cols-1 gap-x-6 border-b border-[var(--rule)] py-3 outline-none md:grid-cols-[minmax(0,15rem)_1fr]">
-                    <div className="v2-row-text" style={{ animationDelay: `${0.25 + i * 0.12}s` }}>
-                      <p className="font-medium">{s.name}</p>
-                      <p className="text-sm text-[var(--soft)]">{s.layer}</p>
-                    </div>
-                    <div className="relative mt-2 md:mt-0">
-                      <div className="relative h-7">
-                        <span
-                          aria-hidden
-                          className="v2-span absolute top-1 h-5 rounded-[3px]"
-                          style={{
-                            left: `${(s.start / TOTAL) * 100}%`,
-                            width: `${((s.end - s.start) / TOTAL) * 100}%`,
-                            background: last ? "var(--amber)" : "var(--cobalt)",
-                            opacity: s.layer === "Cloud" ? 0.35 : 1,
-                            animationDelay: `${0.3 + i * 0.12}s`,
-                          }}
-                        />
-                        <span
-                          className="v2-mono absolute top-1 text-[13px] leading-5 text-[var(--soft)]"
-                          style={{ left: `calc(${(s.end / TOTAL) * 100}% + 8px)` }}
-                        >
-                          {s.end - s.start} ms
-                        </span>
-                      </div>
-                      <p className="v2-detail text-sm text-[var(--soft)]">{s.detail}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </figure>
+            <figure className="v2-portrait relative w-48 justify-self-start md:w-60 md:justify-self-end">
+              <div className="overflow-hidden rounded-2xl ring-1 ring-[var(--rule)]">
+                <Image src="/profile.jpg" alt="Portrait of Eshwar Kadam" width={480} height={480} priority className="aspect-[4/5] h-auto w-full object-cover object-top" />
+              </div>
+              <figcaption className="absolute -bottom-4 left-4 flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm shadow-[0_8px_24px_-12px_rgba(21,24,29,0.45)]">
+                <span aria-hidden className="size-2 rounded-full bg-[#0f9d84]" />
+                Open to new roles
+              </figcaption>
+            </figure>
+          </div>
+
+          <Trace />
         </section>
 
         {/* WHAT I BUILD */}
@@ -97,6 +64,7 @@ export default function V2() {
             <dl className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
               {services.map((s) => (
                 <div key={s.title}>
+                  <span aria-hidden className="mb-4 block h-1.5 w-16 rounded-full" style={{ background: LAYER_COLOR[SERVICE_LAYER[s.title]] }} />
                   <dt className="text-xl font-bold">{s.title}</dt>
                   <dd className="mt-2 max-w-md text-[var(--soft)]">{s.text}</dd>
                 </div>
@@ -110,15 +78,19 @@ export default function V2() {
           <h2 className="text-3xl font-bold">Open-source work</h2>
           <ul className="mt-10 border-t border-[var(--ink)]">
             {projects.map((p) => (
-              <li key={p.title} className="grid gap-4 border-b border-[var(--rule)] py-10 md:grid-cols-[minmax(0,15rem)_1fr_auto] md:gap-10">
-                <h3 className="text-2xl leading-tight font-bold">{p.title}</h3>
+              <li key={p.title} className="grid gap-6 border-b border-[var(--rule)] py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-14">
                 <div>
-                  <p className="max-w-2xl text-[var(--soft)]">{p.desc}</p>
+                  <h3 className="text-3xl leading-tight font-bold md:text-4xl">{p.title}</h3>
+                  <p className="mt-4 max-w-xl text-[var(--soft)]">{p.desc}</p>
                   <p className="mt-4 text-sm text-[var(--soft)]">{p.tags.join(", ")}</p>
+                  <a className="v2-link mt-6 inline-block font-medium text-[var(--cobalt)]" href={p.link} target="_blank" rel="noreferrer">
+                    Source on GitHub
+                  </a>
                 </div>
-                <a className="v2-link self-start font-medium text-[var(--cobalt)]" href={p.link} target="_blank" rel="noreferrer">
-                  Source on GitHub
-                </a>
+                <div className="v2-code self-start overflow-hidden rounded-xl bg-[var(--ink)] text-white shadow-[0_24px_60px_-28px_rgba(21,24,29,0.6)]">
+                  <p className="v2-mono border-b border-white/10 px-5 py-3 text-xs text-white/70">{p.file}</p>
+                  <pre className="v2-mono overflow-x-auto px-5 py-4 text-[13px] leading-6 text-white/90">{p.code.join("\n")}</pre>
+                </div>
               </li>
             ))}
           </ul>
