@@ -171,25 +171,17 @@ export function Series({ d }: { d: SeriesData }) {
                 </button>
               </div>
             </div>
-            <div className="sr-hero-in relative mx-auto w-full max-w-sm">
-              <div className="absolute -inset-6 rounded-2xl bg-[var(--red)]/30 blur-3xl" aria-hidden />
-              <div className="sr-portrait relative overflow-hidden rounded-xl border border-[var(--red)]/40 bg-[#141414] p-3 shadow-2xl">
-                <span className="absolute top-5 left-5 z-20 rounded bg-[var(--red)] px-2 py-1 text-[11px] font-bold">FEATURED ENGINEER</span>
-                {/* dark stage with red rim light; the background-free cutout stands in front */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-[radial-gradient(75%_60%_at_50%_35%,#3a0d12_0%,#170709_55%,#0b0b0b_100%)]">
-                  <div aria-hidden className="absolute inset-x-[12%] top-[14%] h-[58%] rounded-full bg-[var(--red)]/45 blur-[60px]" />
-                  <div aria-hidden className="absolute inset-0 bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.025)_0_1px,transparent_1px_4px)]" />
-                  <Image
-                    src="/portrait-cutout.webp"
-                    alt="Eshwar Kadam"
-                    width={800}
-                    height={778}
-                    priority
-                    className="absolute bottom-0 left-1/2 w-[112%] max-w-none -translate-x-1/2 drop-shadow-[0_0_28px_rgba(229,29,46,0.35)]"
-                  />
-                  <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#141414] to-transparent" />
-                </div>
-              </div>
+            {/* frameless: the background-free cutout stands on the page with a red glow behind */}
+            <div className="sr-hero-in sr-portrait relative mx-auto w-full max-w-md">
+              <div aria-hidden className="pointer-events-none absolute inset-x-[10%] top-[8%] h-[60%] rounded-full bg-[var(--red)]/40 blur-[80px]" />
+              <Image
+                src="/portrait-cutout.webp"
+                alt="Eshwar Kadam"
+                width={800}
+                height={772}
+                priority
+                className="relative w-full"
+              />
             </div>
           </div>
         </section>
