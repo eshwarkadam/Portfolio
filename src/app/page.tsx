@@ -1,308 +1,56 @@
-import Image from "next/image";
-import { SystemHero } from "@/system-hero";
-import { education, services, highlights, jobs, me, projects, toolkit } from "@/content";
-import { ContactForm, DotGrid, Effects, Logo, Nav, Wave, Reveal, StackCard } from "@/fx";
+import { Bebas_Neue, Manrope } from "next/font/google";
+import { education, jobs, me, projects, services, toolkit } from "@/content";
+import { Series, type SeriesData } from "@/series/series";
+import "@/series/series.css";
 
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <p className="mb-5 text-xs font-medium tracking-[0.2em] text-mute uppercase">{children}</p>
-);
-const Em = ({ children }: { children: React.ReactNode }) => <em className="font-serif font-medium">{children}</em>;
-const Pill = ({ children }: { children: React.ReactNode }) => (
-  <li className="flex items-center gap-1.5 rounded-full bg-white/80 px-3 py-1.5 text-sm">{children}</li>
-);
+const display = Bebas_Neue({ variable: "--sr-display", subsets: ["latin"], weight: "400" });
+const sans = Manrope({ variable: "--sr-sans", subsets: ["latin"] });
 
-const logos = [...new Map(toolkit.flatMap((t) => t.tools).filter((t) => t.icon).map((t) => [t.name, t])).values()];
+const TOOLS_FOR: Record<string, string> = { "Mobile apps": "Mobile", "Backend & APIs": "Backend", "Google Cloud": "Cloud & DevOps", "AI features": "AI" };
+const PROGRESS = [92, 85, 74, 66];
+const HUES = [355, 222, 278];
 
-function LogoRow({ items, rev }: { items: typeof logos; rev?: boolean }) {
-  return (
-    <div className="group flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-      <ul className={`${rev ? "marquee-rev" : "marquee"} flex w-max gap-3 py-2 group-hover:[animation-play-state:paused]`}>
-        {[...items, ...items].map((t, i) => (
-          <li key={i} className="flex items-center gap-2.5 rounded-full border border-lav bg-white px-5 py-3 whitespace-nowrap text-mute shadow-sm transition hover:-translate-y-0.5 hover:text-ink">
-            {t.icon && <t.icon className="text-xl" />}<span className="text-sm font-medium">{t.name}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+// only plain serializable data crosses into the client component
+const data: SeriesData = {
+  email: me.email,
+  phone: me.phone,
+  linkedin: me.linkedin,
+  github: me.github,
+  layers: services.map((s, i) => ({
+    title: s.title,
+    text: s.text,
+    tools: (toolkit.find((t) => t.title === TOOLS_FOR[s.title])?.tools ?? []).slice(0, 4).map((x) => x.name).join(", "),
+    progress: PROGRESS[i] ?? 60,
+  })),
+  projects: projects.map((p, i) => ({
+    title: p.title,
+    kind: p.kind.replace(" · ", ", "),
+    desc: p.desc,
+    tags: p.tags,
+    link: p.link,
+    file: p.file,
+    code: p.code.join("\n"),
+    hue: HUES[i % HUES.length],
+  })),
+  seasons: [
+    {
+      season: "SEASON 2",
+      years: "2024 to now",
+      episodes: jobs.map((j) => ({ title: j.role, where: j.where.replace(" · ", ", "), when: j.when.replace(" - ", " to ") })),
+    },
+    {
+      season: "SEASON 1",
+      years: "2020 to 2025",
+      episodes: education.map((e) => ({ title: e.title, where: e.where, when: `${e.meta.replace(" - ", " to ")}, ${e.score}` })),
+    },
+  ],
+  topSkills: ["Kotlin", "Jetpack Compose", "Ktor", "PostgreSQL", "React", "Next.js", "Google Cloud", "Firebase", "Docker", "Gemini API"],
+};
 
 export default function Home() {
   return (
-    <>
-      {/* NAV */}
-      <a href="#about" className="sr-only z-[100] rounded-full bg-sun px-5 py-3 font-medium text-ink-deep focus:not-sr-only focus:fixed focus:top-4 focus:left-1/2 focus:-translate-x-1/2">Skip to content</a>
-      <Effects />
-      <Logo name={`${me.first} ${me.last}`} />
-      <Nav />
-
-      <main id="top">
-        {/* HERO */}
-        <section className="p-3">
-          <div className="relative flex h-[calc(100svh-24px)] min-h-[620px] flex-col justify-end overflow-hidden rounded-[2rem] bg-[radial-gradient(120%_90%_at_75%_30%,#2d3366_0%,#1c2040_60%,#12152c_100%)] px-6 pb-10 text-white md:justify-center md:px-14 md:pb-0">
-            <SystemHero />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#12152c] via-[#12152c]/70 via-40% to-transparent md:bg-gradient-to-r md:from-[#1c2040] md:via-[#1c2040]/60 md:via-35% md:to-transparent md:to-55%" />
-            <div className="relative z-10 md:max-w-2xl">
-              <div aria-hidden className="pointer-events-none absolute -top-10 -left-16 -z-10 h-[420px] w-[620px] rounded-full bg-sun/10 blur-[110px]" />
-              <h1 aria-label={`${me.first} ${me.last}`} className="text-[18vw] leading-[0.88] font-extrabold tracking-tight [text-shadow:0_8px_40px_rgba(0,0,0,0.45)] md:text-[8.5rem]">
-                <span className="block overflow-hidden pb-[0.1em]"><span className="rise block" style={{ animationDelay: "0.1s" }}><Wave text={me.first} /></span></span>
-                <span className="block overflow-hidden pb-[0.1em]"><span className="rise block" style={{ animationDelay: "0.2s" }}><Wave text={me.last} /><span className="text-sun">.</span></span></span>
-              </h1>
-              <div className="fade-up" style={{ animationDelay: "0.4s" }}>
-                <p className="mt-4 font-display text-xl font-semibold text-sun md:text-3xl">Software Engineer</p>
-              </div>
-              <div className="fade-up" style={{ animationDelay: "0.5s" }}>
-                <p className="mt-3 max-w-md text-base text-white/75 md:text-lg">
-                  I build the whole system: the app you tap, the API behind it and the cloud it runs on.
-                </p>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <a data-ripple href="#work" className="group inline-flex items-center gap-3 rounded-full bg-sun py-1.5 pr-1.5 pl-5 font-medium text-ink-deep shadow-lg">
-                    View my work
-                    <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-1">→</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ABOUT */}
-        <section id="about" className="mx-auto grid max-w-6xl gap-12 px-5 py-28 md:grid-cols-2">
-          <Reveal>
-            <Eyebrow>About me</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Turning complexity<br />into <Em>clean software.</Em></h2>
-            <div className="mt-10 flex items-center gap-5">
-              <div className="relative size-32 overflow-hidden rounded-3xl bg-lav">
-                <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="128px" className="object-cover" />
-              </div>
-              <div>
-                <p className="text-lg font-medium">{me.first} {me.last}</p>
-                <p className="text-mute">Software Engineer · Pune</p>
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1} className="md:pt-12">
-            <p className="text-2xl leading-snug">I build complete software products, from the interface people use to the cloud it runs on.</p>
-            <p className="mt-5 leading-relaxed text-mute">
-              I work across the full stack: mobile and web front ends, Kotlin/Ktor APIs on PostgreSQL, deployments on Google Cloud and Firebase, and AI features built in where they help.
-            </p>
-            <div className="mt-10 grid grid-cols-3 gap-3">
-              {[["Experience", "2+", "years in software", "bg-lav"], ["Tech stack", "30+", "tools & technologies", "bg-butter"], ["Platforms", "3", "mobile, web & cloud", "bg-sage"]].map(([k, v, s, bg]) => (
-                <div key={k} className={`rounded-3xl p-4 md:p-5 ${bg}`}>
-                  <p className="text-xs">{k}</p>
-                  <p className="my-1 font-display text-4xl">{v}</p>
-                  <p className="text-xs text-mute">{s}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </section>
-
-        {/* STACK MARQUEE */}
-        <section aria-label="Tech stack" className="py-10">
-          <p className="mb-6 text-center text-xs font-medium tracking-[0.2em] text-mute uppercase">Tools I ship with</p>
-          <div className="space-y-3">
-            <LogoRow items={logos.slice(0, Math.ceil(logos.length / 2))} />
-            <LogoRow items={logos.slice(Math.ceil(logos.length / 2))} rev />
-          </div>
-        </section>
-
-        {/* SERVICES */}
-        <section id="services" className="mx-auto max-w-6xl px-5 py-24">
-          <Reveal className="text-center">
-            <Eyebrow>What I do</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-7xl">Less boilerplate.<br />More <Em>shipping.</Em></h2>
-            <p className="mx-auto mt-6 max-w-xl text-mute">From the first screen to the cloud it runs on, I take products all the way to production.</p>
-          </Reveal>
-          <div className="mt-14 grid gap-4 md:grid-cols-2">
-            {services.map((s, i) => (
-              <Reveal key={s.title} delay={(i % 2) * 0.1} className="group h-full">
-                <article data-glow className="flex h-full flex-col rounded-[1.75rem] border border-lav bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(47,52,87,0.3)] md:p-9">
-                  <div className="flex items-center justify-between">
-                    <span className={`grid size-14 place-items-center rounded-2xl text-2xl ${s.bg}`}><s.icon /></span>
-                    <span className="font-display text-5xl text-lav transition group-hover:text-sun">{s.n}</span>
-                  </div>
-                  <h3 className="mt-8 text-3xl font-medium">{s.title}</h3>
-                  <p className="mt-3 leading-relaxed text-mute">{s.text}</p>
-                  <ul className="mt-auto flex flex-wrap gap-2 pt-6">
-                    {s.points.map((p) => <li key={p} className={`rounded-full px-3 py-1.5 text-sm ${s.bg}`}>{p}</li>)}
-                  </ul>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* TOOLKIT */}
-        <section id="skills" className="mx-auto max-w-6xl px-5 py-24">
-          <Reveal>
-            <Eyebrow>Toolkit</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Every layer.<br /><Em>One clean system.</Em></h2>
-          </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-6">
-            {toolkit.map((t, i) => (
-              <Reveal key={t.title} delay={(i % 3) * 0.08} className={`flex min-h-72 flex-col rounded-[1.75rem] p-7 ${t.bg} md:col-span-2`}>
-                <span className="grid size-12 place-items-center rounded-2xl bg-white/80 text-2xl"><t.icon /></span>
-                <h3 className="mt-auto pt-10 text-2xl font-medium">{t.title}</h3>
-                <p className="mt-1 text-sm text-mute">{t.note}</p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {t.tools.map((x) => <Pill key={x.name}>{x.icon && <x.icon />}{x.name}</Pill>)}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* EXPERIENCE */}
-        <section id="experience" className="mx-auto grid max-w-6xl gap-12 px-5 py-24 md:grid-cols-2 md:gap-20">
-          <div className="md:sticky md:top-28 md:self-start">
-            <Eyebrow>Career</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Where I&apos;ve<br /><Em>shipped.</Em></h2>
-            <div className="mt-10 space-y-3">
-              {jobs.map((j) => (
-                <div key={j.role} className={`rounded-3xl p-6 ${j.current ? "bg-lav" : "border border-lav bg-white"}`}>
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-2xl font-medium">{j.role}</h3>
-                    {j.current && <span className="rounded-full bg-sun px-3 py-1 text-xs font-medium text-ink-deep">Current</span>}
-                  </div>
-                  <a href="https://anireysoft.com" target="_blank" rel="noreferrer" className="mt-2 block w-fit border-b border-ink/30 pb-1 transition hover:border-sun hover:text-ink-deep">{j.where} ↗</a>
-                  <p className="mt-3 text-sm text-mute">{j.when}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="space-y-20 md:pt-40">
-            <Eyebrow>Highlights from VKS Infotech</Eyebrow>
-            {highlights.map((h) => (
-              <Reveal key={h.title}>
-                <h3 className="text-4xl font-medium md:text-5xl">{h.title}</h3>
-                <p className="mt-4 text-lg leading-relaxed text-mute">{h.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* WORK */}
-        <section id="work" className="mx-auto max-w-6xl px-5 py-24">
-          <Reveal className="mb-12">
-            <Eyebrow>Projects</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Things I&apos;ve built<br /><Em>and open-sourced.</Em></h2>
-          </Reveal>
-          {projects.map((p, i) => (
-            <StackCard key={p.title} i={i} total={projects.length}>
-              <article className="group h-full rounded-[2rem] bg-white p-2 shadow-[0_20px_60px_-20px_rgba(47,52,87,0.3)]">
-                <div className={`grid h-full overflow-hidden rounded-[1.6rem] md:grid-cols-2 ${p.bg}`}>
-                  <div className="flex flex-col p-7 md:p-12">
-                    <p className="text-xs tracking-[0.2em] text-mute uppercase">0{i + 1} · {p.kind}</p>
-                    <h3 className="mt-auto text-4xl leading-tight font-medium md:text-6xl">{p.title}</h3>
-                    <p className="mt-4 leading-relaxed text-mute">{p.desc}</p>
-                    <ul className="mt-6 flex flex-wrap gap-2">{p.tags.map((t) => <Pill key={t}>{t}</Pill>)}</ul>
-                    <a data-fill data-ripple href={p.link} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition">View on GitHub ↗</a>
-                  </div>
-                  <div className="relative hidden flex-col justify-center gap-6 border-l border-ink/10 p-10 md:flex">
-                    <div className="overflow-hidden rounded-2xl bg-ink-deep shadow-[0_30px_60px_-25px_rgba(47,52,87,0.6)] transition duration-500 group-hover:-rotate-1">
-                      <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
-                        <span className="size-2.5 rounded-full bg-[#ff6b6b]" /><span className="size-2.5 rounded-full bg-sun" /><span className="size-2.5 rounded-full bg-green-400" />
-                        <span className="ml-3 font-mono text-xs text-white/65">{p.file}</span>
-                      </div>
-                      <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-6 text-white/85">
-                        {p.code.map((l, j) => (
-                          <div key={j}><span className="mr-4 inline-block w-4 text-right text-white/25 select-none">{j + 1}</span>{l}</div>
-                        ))}
-                      </pre>
-                    </div>
-                    <div className="flex justify-center gap-6 text-3xl text-ink/50">
-                      {p.icons.map((Icon, j) => <Icon key={j} />)}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </StackCard>
-          ))}
-        </section>
-
-        {/* EDUCATION */}
-        <section className="mx-auto max-w-6xl px-5 py-24">
-          <Reveal>
-            <Eyebrow>Education</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">Where the<br /><Em>foundations came from.</Em></h2>
-          </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-2">
-            {education.map((e, i) => (
-              <Reveal key={e.title} delay={i * 0.1}>
-                <article data-glow className={`flex h-full flex-col rounded-[1.75rem] p-7 md:p-9 ${i ? "bg-sage" : "bg-lav"}`}>
-                  <div className="flex items-center justify-between text-sm text-mute">
-                    <span>{e.meta}</span>
-                    <span className="rounded-full bg-white/80 px-3 py-1 font-medium text-ink">{e.score}</span>
-                  </div>
-                  <h3 className="mt-10 text-3xl font-medium">{e.title}</h3>
-                  <p className="mt-2 text-mute">{e.where}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* OPEN TO */}
-        <section id="open-to" className="mx-auto max-w-6xl px-5 py-24">
-          <Reveal>
-            <Eyebrow>Availability</Eyebrow>
-            <h2 className="text-5xl leading-[1.05] font-medium md:text-6xl">What I&apos;m<br /><Em>looking for.</Em></h2>
-          </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              ["Roles", "Software Engineer, Full-Stack or Android roles", "bg-lav"],
-              ["Work type", "Full-time roles and freelance projects", "bg-butter"],
-              ["Work mode", "Remote, hybrid or on-site in Pune", "bg-sage"],
-              ["Focus", "Mobile, backend, Google Cloud and AI features", "bg-peach"],
-            ].map(([k, v, bg], i) => (
-              <Reveal key={k} delay={i * 0.08} className="h-full">
-                <div data-glow className={`h-full rounded-[1.75rem] p-7 ${bg}`}>
-                  <p className="text-xs font-medium tracking-[0.2em] text-mute uppercase">{k}</p>
-                  <p className="mt-6 text-xl leading-snug font-medium">{v}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <p className="mt-6 flex items-center gap-2 text-sm text-mute">
-            <span className="size-2 rounded-full bg-green-500" /> Based in {me.location} (IST) · Available for interviews
-          </p>
-        </section>
-
-        {/* CONTACT */}
-        <section id="contact" className="p-3">
-          <div className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-14 text-white md:px-14 md:py-20">
-            <DotGrid />
-            <div className="relative mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2">
-              <Reveal className="text-center md:text-left">
-                <div className="relative mx-auto mb-5 size-20 md:mx-0 md:size-24">
-                  <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="96px" className="rounded-full object-cover ring-[3px] ring-sun" />
-                  <span className="absolute right-0.5 bottom-0.5 size-4 rounded-full border-[3px] border-ink bg-green-400" title="Available for work" />
-                </div>
-                <p className="mb-3 text-xs font-medium tracking-[0.2em] text-white/75 uppercase">Contact</p>
-                <h2 className="text-4xl leading-[1.05] font-medium md:text-5xl">Have a project that<br /><Em>needs engineering?</Em></h2>
-                <p className="mt-4 max-w-md text-sm text-white/70 md:text-base">I&apos;m open to software engineering roles and freelance projects across mobile, web and cloud. Tell me what you&apos;re building.</p>
-                <p className="mt-6 text-sm text-white/75">Or email me directly</p>
-                <a data-ripple href={`mailto:${me.email}`} className="mt-1 inline-block max-w-full font-medium break-all text-sun underline-offset-4 hover:underline">{me.email}</a>
-                <ul className="mt-6 flex flex-wrap justify-center gap-2 text-sm md:justify-start">
-                  {[["View CV", "/Eshwar-Kadam-Resume.pdf"], ["LinkedIn", me.linkedin], ["GitHub", me.github], [me.phone, `tel:${me.phone.replace(/\s/g, "")}`]].map(([l, h]) => (
-                    <li key={l}>
-                      <a href={h} target={h.startsWith("tel:") ? undefined : "_blank"} rel="noreferrer" data-fill data-ripple className="block rounded-full border border-white/20 px-4 py-2 transition">{l} ↗</a>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <ContactForm email={me.email} />
-              </Reveal>
-            </div>
-          </div>
-          <footer className="mx-auto flex max-w-6xl flex-wrap justify-between gap-2 px-5 py-6 text-sm text-mute">
-            <span>© {new Date().getFullYear()} {me.first} {me.last} · {me.location}</span>
-            <a href="#top" className="sweep -mx-3 px-3 pb-1 hover:text-ink">Back to top ↑</a>
-          </footer>
-        </section>
-      </main>
-    </>
+    <div className={`${display.variable} ${sans.variable}`}>
+      <Series d={data} />
+    </div>
   );
 }
