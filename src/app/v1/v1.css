@@ -1,0 +1,26 @@
+/* "phone OS" theme, scoped to .v1 */
+.v1 {
+  background: radial-gradient(70% 60% at 70% 45%, #2a1f5c 0%, #0c0b14 60%) #0c0b14;
+  color: #fff;
+  font-family: var(--v1-sans), system-ui, sans-serif;
+}
+.v1 :focus-visible { outline: 3px solid #7aa7ff; outline-offset: 3px; border-radius: 12px; }
+
+/* home screen wallpaper: soft mesh so icons stay readable */
+.v1-wall {
+  background:
+    radial-gradient(60% 40% at 15% 10%, #ff6a88 0%, transparent 60%),
+    radial-gradient(60% 45% at 90% 35%, #6a5cff 0%, transparent 60%),
+    radial-gradient(70% 50% at 40% 100%, #18c1a6 0%, transparent 60%),
+    #1a1440;
+}
+.v1-glass { background: rgb(255 255 255 / 0.16); backdrop-filter: blur(24px) saturate(1.4); }
+
+.v1-typing span { animation: v1-dot 1s infinite ease-in-out; }
+.v1-typing span:nth-child(2) { animation-delay: 0.15s; }
+.v1-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes v1-dot { 50% { transform: translateY(-3px); opacity: 0.4; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .v1-typing span { animation: none; }
+}
