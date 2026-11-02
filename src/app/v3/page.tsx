@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
 import { education, jobs, me, projects, services, toolkit } from "@/content";
-import { Experience, type V3Data } from "./experience";
+import { V3App } from "./app";
+import { type V3Data } from "./experience";
 import "./v3.css";
 
 const display = Syne({ variable: "--v3-display", subsets: ["latin"] });
@@ -33,7 +34,7 @@ const data: V3Data = {
 export default function V3() {
   return (
     <div className={`${display.variable} ${sans.variable}`}>
-      <Experience d={data} />
+      <V3App d={data} />
     </div>
   );
 }

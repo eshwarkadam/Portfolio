@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
 import Image from "next/image";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { createParticles } from "./particles";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
@@ -22,7 +22,15 @@ export type V3Data = {
   education: { title: string; where: string; meta: string }[];
 };
 
-export function Experience({ d }: { d: V3Data }) {
+export type Mode = "recruiter" | "developer";
+
+// middle sections in reading order for each visitor type (hero first, contact last)
+const ORDER: Record<Mode, ("manifesto" | "stack" | "work" | "career")[]> = {
+  recruiter: ["manifesto", "career", "stack", "work"],
+  developer: ["manifesto", "work", "stack", "career"],
+};
+
+export function Experience({ d, mode, onSwitch, skipIntro }: { d: V3Data; mode: Mode; onSwitch: () => void; skipIntro: boolean }) {
   const root = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -91,7 +99,8 @@ export function Experience({ d }: { d: V3Data }) {
       /* ---------- 1. preloader + hero intro (the signature moment) ---------- */
       const counter = { v: 0 };
       const intro = gsap.timeline();
-      intro
+      if (skipIntro) intro.set(q(".v3-loader"), { autoAlpha: 0 }).to(state, { intro: 1, duration: 1.6, ease: "expo.out" });
+      else intro
         .to(counter, { v: 100, duration: 1.4, ease: "power2.inOut", onUpdate: () => { (q(".v3-count")[0] as HTMLElement).textContent = String(Math.round(counter.v)); } })
         .to(q(".v3-loader"), { yPercent: -100, duration: 0.9, ease: "expo.inOut" })
         .to(state, { intro: 1, duration: 2.2, ease: "expo.out" }, "-=0.5")
@@ -143,58 +152,15 @@ export function Experience({ d }: { d: V3Data }) {
     { scope: root },
   );
 
-  return (
-    <div ref={root} className="v3">
-      {/* preloader */}
-      <div className="v3-loader fixed inset-0 z-[90] flex items-end justify-between bg-[var(--aqua)] p-6 text-[var(--plum)] md:p-10" aria-hidden>
-        <p className="v3-display text-2xl font-extrabold">Compiling</p>
-        <p className="v3-display text-[22vw] leading-[0.8] font-extrabold md:text-[14vw]"><span className="v3-count">0</span></p>
-      </div>
-      <div className="v3-cursor pointer-events-none fixed top-0 left-0 z-[80] size-4 rounded-full bg-[var(--aqua)] opacity-0 mix-blend-difference" aria-hidden />
-
-      <a href="#work" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[95] focus:rounded-full focus:bg-[var(--aqua)] focus:px-4 focus:py-2 focus:text-[var(--plum)]">
-        Skip to work
-      </a>
-
-      <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 mix-blend-difference md:px-10">
-        <a href="#top" className="v3-display text-lg font-extrabold text-white">EK</a>
-        <nav aria-label="Main" className="flex gap-6 text-sm text-white md:gap-8">
-          <a href="#stack">Stack</a>
-          <a href="#work">Work</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
-
-      <main id="top">
-        {/* HERO */}
-        <section className="v3-hero relative h-svh overflow-hidden">
-          <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-hidden />
-          <h1 className="sr-only">Eshwar Kadam, Software Engineer</h1>
-          <div className="v3-hero-copy pointer-events-none absolute inset-x-6 bottom-8 flex flex-col gap-6 md:inset-x-10 md:bottom-10 md:flex-row md:items-end md:justify-between">
-            <p className="v3-hero-line v3-display max-w-xl text-2xl leading-tight font-bold md:text-4xl">
-              Software engineer building products that travel from your phone to the cloud.
-            </p>
-            <div className="v3-hero-meta flex items-center gap-4 text-sm text-[var(--pearl)]/80">
-              <span className="relative block size-14 overflow-hidden rounded-full ring-2 ring-[var(--aqua)]">
-                <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="56px" className="object-cover" priority />
-              </span>
-              <span>Pune, India<br />Open to new roles</span>
-            </div>
-          </div>
-          <p className="v3-sphere-caption v3-display pointer-events-none absolute inset-x-0 bottom-10 text-center text-xl font-bold opacity-0 md:text-3xl">
-            Many parts. One working system.
-          </p>
-          <p className="v3-hero-meta pointer-events-none absolute top-24 left-1/2 hidden -translate-x-1/2 text-sm text-[var(--pearl)]/60 md:block">Scroll to compile</p>
-        </section>
-
-        {/* MANIFESTO */}
+  const sections = {
+    manifesto: (
         <section className="px-6 py-[22vh] md:px-10">
           <p className="v3-manifesto v3-display mx-auto max-w-5xl text-3xl leading-[1.15] font-bold md:text-6xl">
             I write the Kotlin that runs on your phone, the API it talks to, the database behind it, and the cloud that keeps it all online. Then I add the AI that makes it feel smart.
           </p>
         </section>
-
-        {/* STACK: horizontal */}
+    ),
+    stack: (
         <section id="stack" className="v3-hscroll relative overflow-hidden">
           <div className="v3-progress absolute top-0 left-0 h-1 w-full origin-left scale-x-0 bg-[var(--aqua)]" aria-hidden />
           <div className="v3-track flex flex-col gap-6 px-6 py-24 md:h-svh md:flex-row md:items-center md:gap-10 md:px-10 md:py-0">
@@ -212,8 +178,8 @@ export function Experience({ d }: { d: V3Data }) {
             ))}
           </div>
         </section>
-
-        {/* WORK: horizontal */}
+    ),
+    work: (
         <section id="work" className="v3-hscroll relative overflow-hidden bg-[var(--pearl)] text-[var(--plum)]">
           <div className="v3-progress absolute top-0 left-0 h-1 w-full origin-left scale-x-0 bg-[var(--plum)]" aria-hidden />
           <div className="v3-track flex flex-col gap-6 px-6 py-24 md:h-svh md:flex-row md:items-center md:gap-10 md:px-10 md:py-0">
@@ -239,9 +205,9 @@ export function Experience({ d }: { d: V3Data }) {
             ))}
           </div>
         </section>
-
-        {/* CAREER */}
-        <section className="v3-career px-6 py-32 md:px-10">
+    ),
+    career: (
+        <section id="career" className="v3-career px-6 py-32 md:px-10">
           <div className="mx-auto grid max-w-5xl gap-16 md:grid-cols-[1fr_1.4fr]">
             <h2 className="v3-display text-5xl leading-none font-extrabold md:sticky md:top-32 md:self-start md:text-7xl">Where I&apos;ve been</h2>
             <div className="relative pl-10">
@@ -257,6 +223,59 @@ export function Experience({ d }: { d: V3Data }) {
             </div>
           </div>
         </section>
+    ),
+  };
+
+  return (
+    <div ref={root} className="v3">
+      {/* preloader */}
+      <div className="v3-loader fixed inset-0 z-[90] flex items-end justify-between bg-[var(--aqua)] p-6 text-[var(--plum)] md:p-10" aria-hidden>
+        <p className="v3-display text-2xl font-extrabold">Compiling</p>
+        <p className="v3-display text-[22vw] leading-[0.8] font-extrabold md:text-[14vw]"><span className="v3-count">0</span></p>
+      </div>
+      <div className="v3-cursor pointer-events-none fixed top-0 left-0 z-[80] size-4 rounded-full bg-[var(--aqua)] opacity-0 mix-blend-difference" aria-hidden />
+
+      <a href="#work" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[95] focus:rounded-full focus:bg-[var(--aqua)] focus:px-4 focus:py-2 focus:text-[var(--plum)]">
+        Skip to work
+      </a>
+
+      <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 mix-blend-difference md:px-10">
+        <a href="#top" className="v3-display text-lg font-extrabold text-white">EK</a>
+        <nav aria-label="Main" className="flex items-center gap-5 text-sm text-white md:gap-8">
+          {mode === "recruiter" && <a href="#career">Career</a>}
+          <a href="#work">Work</a>
+          <a className="hidden sm:inline" href="#stack">Stack</a>
+          <a href="#contact">Contact</a>
+          {mode === "recruiter" && <a href="/Eshwar-Kadam-Resume.pdf" target="_blank" rel="noreferrer" className="hidden rounded-full border border-white px-3 py-1 sm:inline">Resume</a>}
+          <button type="button" onClick={onSwitch} className="rounded-full border border-white/60 px-3 py-1 text-xs" title="Change who this page is arranged for">
+            {mode === "recruiter" ? "Recruiter view" : "Developer view"} ⇄
+          </button>
+        </nav>
+      </header>
+
+      <main id="top">
+        {/* HERO */}
+        <section className="v3-hero relative h-svh overflow-hidden">
+          <canvas ref={canvas} className="absolute inset-0 h-full w-full" aria-hidden />
+          <h1 className="sr-only">Eshwar Kadam, Software Engineer</h1>
+          <div className="v3-hero-copy pointer-events-none absolute inset-x-6 bottom-8 flex flex-col gap-6 md:inset-x-10 md:bottom-10 md:flex-row md:items-end md:justify-between">
+            <p className="v3-hero-line v3-display max-w-xl text-2xl leading-tight font-bold md:text-4xl">
+              Software engineer building products that travel from your phone to the cloud.
+            </p>
+            <div className="v3-hero-meta flex items-center gap-4 text-sm text-[var(--pearl)]/80">
+              <span className="relative block size-14 overflow-hidden rounded-full ring-2 ring-[var(--aqua)]">
+                <Image src="/profile.jpg" alt="Eshwar Kadam" fill sizes="56px" className="object-cover" priority />
+              </span>
+              <span>Pune, India<br />Open to new roles</span>
+            </div>
+          </div>
+          <p className="v3-sphere-caption v3-display pointer-events-none absolute inset-x-0 bottom-10 text-center text-xl font-bold opacity-0 md:text-3xl">
+            Many parts. One working system.
+          </p>
+          <p className="v3-hero-meta pointer-events-none absolute top-24 left-1/2 hidden -translate-x-1/2 text-sm text-[var(--pearl)]/60 md:block">Scroll to compile</p>
+        </section>
+
+        {ORDER[mode].map((k) => <Fragment key={k}>{sections[k]}</Fragment>)}
 
         {/* CONTACT */}
         <section id="contact" className="relative overflow-hidden px-6 pt-32 pb-12 md:px-10">
